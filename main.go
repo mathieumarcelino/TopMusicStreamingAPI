@@ -2,114 +2,83 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
-	"strconv"
 	"strings"
 
 	"github.com/gocolly/colly"
 )
 
 type Info struct {
-	POSITION int    `json:"position"`
-	TRACK    string `json:"track"`
-	ARTIST   string `json:"artist"`
+	POSITION           float64 `json:"position"`
+	SpotifyPOSITION    int     `json:"spotify"`
+	ApplemusicPOSITION int     `json:"applemusic"`
+	DeezerPOSITION     int     `json:"deezer"`
+	TRACK              string  `json:"track"`
+	ARTIST             string  `json:"artist"`
 }
 
 func main() {
 
 	// --- Spotify ---
 
-	allInfosSpotify := make([]Info, 0)
+	allInfosSpotify := [][]string{}
 
 	collectorSpotify := colly.NewCollector(
 		colly.AllowedDomains("spotifycharts.com"),
 	)
 
 	collectorSpotify.OnHTML(".chart-table tbody tr", func(element *colly.HTMLElement) {
-		infoPOSITIONSpotify, err := strconv.Atoi(element.ChildText(".chart-table-position"))
-		if err == nil {
-			fmt.Println("Could not connvert into int")
-		}
+		infoPOSITIONSpotify := element.ChildText(".chart-table-position")
 		infoTRACKSpotify := trimStringTrack(element.ChildText(".chart-table-track strong"))
 		infoARTISTSpotify := trimStringArtist(element.ChildText(".chart-table-track span"))[3:]
 
-		infoSpotify := Info{
-			POSITION: infoPOSITIONSpotify,
-			TRACK:    infoTRACKSpotify,
-			ARTIST:   infoARTISTSpotify,
-		}
+		infoSpotify := []string{infoPOSITIONSpotify, infoTRACKSpotify, infoARTISTSpotify}
 
 		allInfosSpotify = append(allInfosSpotify, infoSpotify)
 	})
 
 	collectorSpotify.Visit("https://spotifycharts.com/regional/fr/daily/latest")
 
-	encS := json.NewEncoder(os.Stdout)
-	encS.SetIndent("", " ")
-	encS.Encode(allInfosSpotify)
-
-	writeJSON(allInfosSpotify, "spotify.json")
-
 	// --- Apple Music ---
 
-	allInfosAppleMusic := make([]Info, 0)
+	allInfosAppleMusic := [][]string{}
 
 	collectorAppleMusic := colly.NewCollector(
 		colly.AllowedDomains("music.apple.com"),
 	)
 
 	collectorAppleMusic.OnHTML(".songs-list .track .col-song .col-song__wrapper", func(element *colly.HTMLElement) {
-		infoPOSITIONAppleMusic, err := strconv.Atoi(element.ChildText(".rank"))
-		if err == nil {
-			fmt.Println("Could not connvert into int")
-		}
+		infoPOSITIONAppleMusic := element.ChildText(".rank")
 		infoTRACKAppleMusic := trimStringTrack(element.ChildText(".song-wrapper .song-name-wrapper .song-name"))
-		infoARTISTAppleMusic := element.ChildText(".song-wrapper .song-name-wrapper .by-line span a")
+		infoARTISTAppleMusic := ""
+		element.ForEach(".song-wrapper .song-name-wrapper .by-line span", func(_ int, el *colly.HTMLElement) {
+			infoARTISTAppleMusic = el.ChildText("a:nth-child(1)")
+		})
 
-		infoAppleMusic := Info{
-			POSITION: infoPOSITIONAppleMusic,
-			TRACK:    infoTRACKAppleMusic,
-			ARTIST:   infoARTISTAppleMusic,
-		}
+		infoAppleMusic := []string{infoPOSITIONAppleMusic, infoTRACKAppleMusic, infoARTISTAppleMusic}
 
 		allInfosAppleMusic = append(allInfosAppleMusic, infoAppleMusic)
 	})
 
 	collectorAppleMusic.Visit("https://music.apple.com/fr/playlist/le-top-100-france/pl.6e8cfd81d51042648fa36c9df5236b8d")
 
-	encAM := json.NewEncoder(os.Stdout)
-	encAM.SetIndent("", " ")
-	encAM.Encode(allInfosAppleMusic)
-
-	writeJSON(allInfosAppleMusic, "applemusic.json")
-
 	// --- Deezer ---
 
-	allInfosDeezer := make([]Info, 0)
+	allInfosDeezer := [][]string{}
 
 	collectorDeezer := colly.NewCollector(
 		colly.AllowedDomains("www.chartsmusic.fr"),
 	)
 
 	collectorDeezer.OnHTML(".table-hover", func(element *colly.HTMLElement) {
-
 		element.ForEach("tbody tr", func(_ int, el *colly.HTMLElement) {
-			infoPOSITIONDeezer, err := strconv.Atoi(el.ChildText("td:nth-child(1) span"))
-			if err == nil {
-				fmt.Println("Could not connvert into int")
-			}
-
+			infoPOSITIONDeezer := el.ChildText("td:nth-child(1) span")
 			infoTRACKDeezer := trimStringTrack(el.ChildText("td:nth-child(3) strong a"))
 			infoARTISTDeezer := el.ChildText("td:nth-child(4) a")
 
-			infoDeezer := Info{
-				POSITION: infoPOSITIONDeezer,
-				TRACK:    infoTRACKDeezer,
-				ARTIST:   infoARTISTDeezer,
-			}
+			infoDeezer := []string{infoPOSITIONDeezer, infoTRACKDeezer, infoARTISTDeezer}
 
 			allInfosDeezer = append(allInfosDeezer, infoDeezer)
 		})
@@ -118,11 +87,48 @@ func main() {
 
 	collectorDeezer.Visit("https://www.chartsmusic.fr/deezer")
 
-	encD := json.NewEncoder(os.Stdout)
-	encD.SetIndent("", " ")
-	encD.Encode(allInfosDeezer)
+	// --- Final Array ---
 
-	writeJSON(allInfosDeezer, "deezer.json")
+	allfinalsINFOS := make([]Info, 0)
+
+	for i := 0; i < 99; i++ {
+		spotifyPOSITION := float64(i + 1)
+		applemusicPOSITION := 150.0
+		deezerPOSITION := 150.0
+
+		for j := 0; j < len(allInfosAppleMusic); j++ {
+			if strings.ToLower(allInfosSpotify[i][1]) == strings.ToLower(allInfosAppleMusic[j][1]) {
+				applemusicPOSITION = float64(j + 1)
+			}
+		}
+
+		for k := 0; k < len(allInfosDeezer); k++ {
+			if strings.ToLower(allInfosSpotify[i][1]) == strings.ToLower(allInfosDeezer[k][1]) {
+				deezerPOSITION = float64(k + 1)
+			}
+		}
+
+		finalPOSITION := (spotifyPOSITION + applemusicPOSITION + deezerPOSITION) / 3.0
+		finalTRACK := allInfosSpotify[i][1]
+		finalARTIST := allInfosSpotify[i][2]
+
+		finalInfo := Info{
+			POSITION:           finalPOSITION,
+			SpotifyPOSITION:    int(spotifyPOSITION),
+			ApplemusicPOSITION: int(applemusicPOSITION),
+			DeezerPOSITION:     int(deezerPOSITION),
+			TRACK:              finalTRACK,
+			ARTIST:             finalARTIST,
+		}
+
+		allfinalsINFOS = append(allfinalsINFOS, finalInfo)
+	}
+
+	encF := json.NewEncoder(os.Stdout)
+	encF.SetIndent("", " ")
+	encF.Encode(allfinalsINFOS)
+
+	writeJSON(allfinalsINFOS, "final.json")
 
 }
 
