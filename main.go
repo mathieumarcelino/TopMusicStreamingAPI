@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/gocolly/colly"
@@ -90,8 +91,10 @@ func main() {
 	// --- Final Array ---
 
 	allfinalsINFOS := make([]Info, 0)
+	alreadyCkeck := []string{}
 
-	for i := 0; i < 99; i++ {
+	for i := 0; i < 100; i++ {
+
 		spotifyPOSITION := float64(i + 1)
 		applemusicPOSITION := 150.0
 		deezerPOSITION := 150.0
@@ -122,11 +125,97 @@ func main() {
 		}
 
 		allfinalsINFOS = append(allfinalsINFOS, finalInfo)
+		alreadyCkeck = append(alreadyCkeck, strings.ToLower(allInfosSpotify[i][1]))
+		println(strings.ToLower(allInfosSpotify[i][1]))
+	}
+
+	for i := 0; i < 100; i++ {
+
+		applemusicPOSITION := float64(i + 1)
+		spotifyPOSITION := 150.0
+		deezerPOSITION := 150.0
+
+		if stringInSlice(strings.ToLower(allInfosAppleMusic[i][1]), alreadyCkeck) == false {
+
+			for j := 0; j < len(allInfosSpotify); j++ {
+				if strings.ToLower(allInfosAppleMusic[i][1]) == strings.ToLower(allInfosSpotify[j][1]) {
+					spotifyPOSITION = float64(j + 1)
+				}
+			}
+
+			for k := 0; k < len(allInfosDeezer); k++ {
+				if strings.ToLower(allInfosAppleMusic[i][1]) == strings.ToLower(allInfosDeezer[k][1]) {
+					deezerPOSITION = float64(k + 1)
+				}
+			}
+
+			finalPOSITION := (spotifyPOSITION + applemusicPOSITION + deezerPOSITION) / 3.0
+			finalTRACK := allInfosAppleMusic[i][1]
+			finalARTIST := allInfosAppleMusic[i][2]
+
+			finalInfo := Info{
+				POSITION:           finalPOSITION,
+				SpotifyPOSITION:    int(spotifyPOSITION),
+				ApplemusicPOSITION: int(applemusicPOSITION),
+				DeezerPOSITION:     int(deezerPOSITION),
+				TRACK:              finalTRACK,
+				ARTIST:             finalARTIST,
+			}
+
+			allfinalsINFOS = append(allfinalsINFOS, finalInfo)
+			alreadyCkeck = append(alreadyCkeck, strings.ToLower(allInfosAppleMusic[i][1]))
+
+		}
+
+	}
+
+	for i := 0; i < 100; i++ {
+
+		deezerPOSITION := float64(i + 1)
+		spotifyPOSITION := 150.0
+		applemusicPOSITION := 150.0
+
+		if stringInSlice(strings.ToLower(allInfosDeezer[i][1]), alreadyCkeck) == false {
+
+			for j := 0; j < len(allInfosSpotify); j++ {
+				if strings.ToLower(allInfosDeezer[i][1]) == strings.ToLower(allInfosSpotify[j][1]) {
+					spotifyPOSITION = float64(j + 1)
+				}
+			}
+
+			for k := 0; k < len(allInfosAppleMusic); k++ {
+				if strings.ToLower(allInfosDeezer[i][1]) == strings.ToLower(allInfosAppleMusic[k][1]) {
+					applemusicPOSITION = float64(k + 1)
+				}
+			}
+
+			finalPOSITION := (spotifyPOSITION + applemusicPOSITION + deezerPOSITION) / 3.0
+			finalTRACK := allInfosDeezer[i][1]
+			finalARTIST := allInfosDeezer[i][2]
+
+			finalInfo := Info{
+				POSITION:           finalPOSITION,
+				SpotifyPOSITION:    int(spotifyPOSITION),
+				ApplemusicPOSITION: int(applemusicPOSITION),
+				DeezerPOSITION:     int(deezerPOSITION),
+				TRACK:              finalTRACK,
+				ARTIST:             finalARTIST,
+			}
+
+			allfinalsINFOS = append(allfinalsINFOS, finalInfo)
+			alreadyCkeck = append(alreadyCkeck, strings.ToLower(allInfosDeezer[i][1]))
+
+		}
+
 	}
 
 	encF := json.NewEncoder(os.Stdout)
 	encF.SetIndent("", " ")
 	encF.Encode(allfinalsINFOS)
+
+	sort.Slice(allfinalsINFOS, func(p, q int) bool {
+		return allfinalsINFOS[p].POSITION < allfinalsINFOS[q].POSITION
+	})
 
 	writeJSON(allfinalsINFOS, "final.json")
 
@@ -144,6 +233,15 @@ func trimStringArtist(s string) string {
 		return s[:idx]
 	}
 	return s
+}
+
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
 }
 
 func writeJSON(data []Info, file string) {
