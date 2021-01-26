@@ -10,9 +10,9 @@ import (
 
 func main() {
 
-	http.HandleFunc("/json", func(w http.ResponseWriter, r *http.Request) {
-		hubfr.Hub_FR()
-	})
+	// http.HandleFunc("/json", func(w http.ResponseWriter, r *http.Request) {
+	hubfr.Hub_FR()
+	// })
 
 	http.HandleFunc("/api", api.Api)
 	http.ListenAndServe(":9990", nil)

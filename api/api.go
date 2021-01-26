@@ -11,7 +11,8 @@ func Api(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		country := r.URL.Query().Get("country")
-		jsonFile, err := os.Open("root/go/go-web/json/" + country + ".json")
+		// jsonFile, err := os.Open("root/go/go-web/json/" + country + ".json")
+		jsonFile, err := os.Open("json/" + country + ".json")
 		if err != nil {
 			fmt.Println(err)
 		}

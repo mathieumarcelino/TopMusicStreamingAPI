@@ -10,5 +10,5 @@ func Hub_FR() {
 	allInfosAppleMusic := collectorfr.AppleMusic()
 	allInfosDeezer := collectorfr.Deezer()
 
-	sorter.Sorter(allInfosSpotify, allInfosAppleMusic, allInfosDeezer, "fr")
+	sorter.Sorter(allInfosSpotify, "spotify", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "fr")
 }

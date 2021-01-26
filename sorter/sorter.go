@@ -4,101 +4,161 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
-	"os"
 	"sort"
 	"strings"
+	"time"
 	"topmusicstreaming/utils"
 )
 
-type Infos struct {
-	Tracks []Info `json:"tracks"`
+type Final struct {
+	Header Header  `json:"header"`
+	Tracks []Track `json:"tracks"`
 }
 
-type Info struct {
-	POSITION           float64 `json:"position"`
-	SpotifyPOSITION    int     `json:"spotify"`
-	ApplemusicPOSITION int     `json:"applemusic"`
-	DeezerPOSITION     int     `json:"deezer"`
-	TRACK              string  `json:"track"`
-	ARTIST             string  `json:"artist"`
+type Track struct {
+	Position  float64   `json:"position"`
+	Track     string    `json:"track"`
+	Artist    string    `json:"artist"`
+	Cover     string    `json:"cover"`
+	Positions Positions `json:"positions"`
 }
 
-func Sorter(array1 [][]string, array2 [][]string, array3 [][]string, country string) {
+type Positions struct {
+	Platform1Position int `json:"1"`
+	Platform2Position int `json:"2"`
+	Platform3Position int `json:"3"`
+}
 
-	allfinalsINFOS := make([]Info, 0)
-	allfinalsINFOSJson := Infos{allfinalsINFOS}
+type Header struct {
+	Country string `json:"country"`
+	Date    string `json:"date"`
+	Time    string `json:"time"`
+	Names   Names  `json:"names"`
+}
+
+type Names struct {
+	Platform1Name string `json:"1"`
+	Platform2Name string `json:"2"`
+	Platform3Name string `json:"3"`
+}
+
+func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, array3 [][]string, name3 string, country string) {
+
+	dt := time.Now()
+
+	finalNames := Names{
+		Platform1Name: name1,
+		Platform2Name: name2,
+		Platform3Name: name3,
+	}
+
+	finalHeader := Header{
+		Country: country,
+		Date:    dt.Format("01-02-2006"),
+		Time:    dt.Format("15:04:05"),
+		Names:   finalNames,
+	}
+
+	finalsTracks := make([]Track, 0)
 	alreadyCkeck := []string{}
 
 	for i := 0; i < 100; i++ {
 
-		spotifyPOSITION := float64(i + 1)
-		applemusicPOSITION := 150.0
-		deezerPOSITION := 150.0
+		platform1Position := float64(i + 1)
+		platform2Position := 150.0
+		platform3Position := 150.0
 
 		for j := 0; j < len(array2); j++ {
 			if strings.ToLower(array1[i][1]) == strings.ToLower(array2[j][1]) {
-				applemusicPOSITION = float64(j + 1)
+				platform2Position = float64(j + 1)
 			}
 		}
 
 		for k := 0; k < len(array3); k++ {
 			if strings.ToLower(array1[i][1]) == strings.ToLower(array3[k][1]) {
-				deezerPOSITION = float64(k + 1)
+				platform3Position = float64(k + 1)
 			}
 		}
 
-		finalPOSITION := (spotifyPOSITION + applemusicPOSITION + deezerPOSITION) / 3.0
-		finalTRACK := array1[i][1]
-		finalARTIST := array1[i][2]
+		finalPositionGlobal := (platform1Position + platform2Position + platform3Position) / 3.0
 
-		finalInfo := Info{
-			POSITION:           finalPOSITION,
-			SpotifyPOSITION:    int(spotifyPOSITION),
-			ApplemusicPOSITION: int(applemusicPOSITION),
-			DeezerPOSITION:     int(deezerPOSITION),
-			TRACK:              finalTRACK,
-			ARTIST:             finalARTIST,
+		if platform2Position == 150.0 {
+			platform2Position = 0
+		}
+		if platform3Position == 150.0 {
+			platform3Position = 0
 		}
 
-		allfinalsINFOSJson.Tracks = append(allfinalsINFOSJson.Tracks, finalInfo)
+		finalTrackName := array1[i][1]
+		finalArtistName := array1[i][2]
+		finalCoverUrl := array1[i][3]
+
+		finalPosition := Positions{
+			Platform1Position: int(platform1Position),
+			Platform2Position: int(platform2Position),
+			Platform3Position: int(platform3Position),
+		}
+
+		finalTrack := Track{
+			Position:  finalPositionGlobal,
+			Track:     finalTrackName,
+			Artist:    finalArtistName,
+			Cover:     finalCoverUrl,
+			Positions: finalPosition,
+		}
+
+		finalsTracks = append(finalsTracks, finalTrack)
 		alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[i][1]))
-		println(strings.ToLower(array1[i][1]))
 	}
 
 	for i := 0; i < 100; i++ {
 
-		applemusicPOSITION := float64(i + 1)
-		spotifyPOSITION := 150.0
-		deezerPOSITION := 150.0
+		platform2Position := float64(i + 1)
+		platform1Position := 150.0
+		platform3Position := 150.0
 
 		if utils.StringInSlice(strings.ToLower(array2[i][1]), alreadyCkeck) == false {
 
 			for j := 0; j < len(array1); j++ {
 				if strings.ToLower(array2[i][1]) == strings.ToLower(array1[j][1]) {
-					spotifyPOSITION = float64(j + 1)
+					platform1Position = float64(j + 1)
 				}
 			}
 
 			for k := 0; k < len(array3); k++ {
 				if strings.ToLower(array2[i][1]) == strings.ToLower(array3[k][1]) {
-					deezerPOSITION = float64(k + 1)
+					platform3Position = float64(k + 1)
 				}
 			}
 
-			finalPOSITION := (spotifyPOSITION + applemusicPOSITION + deezerPOSITION) / 3.0
-			finalTRACK := array2[i][1]
-			finalARTIST := array2[i][2]
+			finalPositionGlobal := (platform1Position + platform2Position + platform3Position) / 3.0
 
-			finalInfo := Info{
-				POSITION:           finalPOSITION,
-				SpotifyPOSITION:    int(spotifyPOSITION),
-				ApplemusicPOSITION: int(applemusicPOSITION),
-				DeezerPOSITION:     int(deezerPOSITION),
-				TRACK:              finalTRACK,
-				ARTIST:             finalARTIST,
+			if platform1Position == 150.0 {
+				platform1Position = 0
+			}
+			if platform3Position == 150.0 {
+				platform3Position = 0
 			}
 
-			allfinalsINFOSJson.Tracks = append(allfinalsINFOSJson.Tracks, finalInfo)
+			finalTrackName := array2[i][1]
+			finalArtistName := array2[i][2]
+			finalCoverUrl := array2[i][3]
+
+			finalPosition := Positions{
+				Platform1Position: int(platform1Position),
+				Platform2Position: int(platform2Position),
+				Platform3Position: int(platform3Position),
+			}
+
+			finalTrack := Track{
+				Position:  finalPositionGlobal,
+				Track:     finalTrackName,
+				Artist:    finalArtistName,
+				Cover:     finalCoverUrl,
+				Positions: finalPosition,
+			}
+
+			finalsTracks = append(finalsTracks, finalTrack)
 			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[i][1]))
 
 		}
@@ -107,56 +167,76 @@ func Sorter(array1 [][]string, array2 [][]string, array3 [][]string, country str
 
 	for i := 0; i < 100; i++ {
 
-		deezerPOSITION := float64(i + 1)
-		spotifyPOSITION := 150.0
-		applemusicPOSITION := 150.0
+		platform3Position := float64(i + 1)
+		platform1Position := 150.0
+		platform2Position := 150.0
 
 		if utils.StringInSlice(strings.ToLower(array3[i][1]), alreadyCkeck) == false {
 
 			for j := 0; j < len(array1); j++ {
 				if strings.ToLower(array3[i][1]) == strings.ToLower(array1[j][1]) {
-					spotifyPOSITION = float64(j + 1)
+					platform1Position = float64(j + 1)
 				}
 			}
 
 			for k := 0; k < len(array2); k++ {
 				if strings.ToLower(array3[i][1]) == strings.ToLower(array2[k][1]) {
-					applemusicPOSITION = float64(k + 1)
+					platform2Position = float64(k + 1)
 				}
 			}
 
-			finalPOSITION := (spotifyPOSITION + applemusicPOSITION + deezerPOSITION) / 3.0
-			finalTRACK := array3[i][1]
-			finalARTIST := array3[i][2]
+			finalPositionGlobal := (platform1Position + platform2Position + platform3Position) / 3.0
 
-			finalInfo := Info{
-				POSITION:           finalPOSITION,
-				SpotifyPOSITION:    int(spotifyPOSITION),
-				ApplemusicPOSITION: int(applemusicPOSITION),
-				DeezerPOSITION:     int(deezerPOSITION),
-				TRACK:              finalTRACK,
-				ARTIST:             finalARTIST,
+			if platform1Position == 150.0 {
+				platform1Position = 0
+			}
+			if platform2Position == 150.0 {
+				platform2Position = 0
 			}
 
-			allfinalsINFOSJson.Tracks = append(allfinalsINFOSJson.Tracks, finalInfo)
+			finalTrackName := array3[i][1]
+			finalArtistName := array3[i][2]
+			finalCoverUrl := array3[i][3]
+
+			finalPosition := Positions{
+				Platform1Position: int(platform1Position),
+				Platform2Position: int(platform2Position),
+				Platform3Position: int(platform3Position),
+			}
+
+			finalTrack := Track{
+				Position:  finalPositionGlobal,
+				Track:     finalTrackName,
+				Artist:    finalArtistName,
+				Cover:     finalCoverUrl,
+				Positions: finalPosition,
+			}
+
+			finalsTracks = append(finalsTracks, finalTrack)
 			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[i][1]))
 
 		}
 
 	}
 
-	encF := json.NewEncoder(os.Stdout)
-	encF.SetIndent("", " ")
-	encF.Encode(allfinalsINFOSJson)
+	// encF := json.NewEncoder(os.Stdout)
+	// encF.SetIndent("", " ")
+	// encF.Encode(allfinalsINFOSJson)
 
-	sort.Slice(allfinalsINFOSJson.Tracks, func(p, q int) bool {
-		return allfinalsINFOSJson.Tracks[p].POSITION < allfinalsINFOSJson.Tracks[q].POSITION
+	sort.Slice(finalsTracks, func(p, q int) bool {
+		return finalsTracks[p].Position < finalsTracks[q].Position
 	})
 
-	WriteJSON(allfinalsINFOSJson, "root/go/go-web/json/"+country+".json")
+	finalJson := Final{
+		Header: finalHeader,
+		Tracks: finalsTracks,
+	}
+
+	WriteJSON(finalJson, "json/"+country+".json")
+	// WriteJSON(allfinalsINFOSJson, "root/go/go-web/json/"+country+".json")
 }
 
-func WriteJSON(data Infos, file string) {
+func WriteJSON(data Final, file string) {
 	dataFile, err := json.MarshalIndent(data, "", " ")
 	if err != nil {
 		log.Println("Could not create JSON")
