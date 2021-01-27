@@ -2,8 +2,10 @@ package sorter
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"sort"
 	"strings"
 	"time"
@@ -16,17 +18,30 @@ type Final struct {
 }
 
 type Track struct {
-	Position  float64   `json:"position"`
+	Position  int       `json:"position"`
+	Evolution string    `json:"evolution"`
 	Track     string    `json:"track"`
 	Artist    string    `json:"artist"`
 	Cover     string    `json:"cover"`
 	Positions Positions `json:"positions"`
 }
 
+type TrackBeforeSort struct {
+	Position          float64 `json:"position"`
+	Evolution         string  `json:"evolution"`
+	Track             string  `json:"track"`
+	Artist            string  `json:"artist"`
+	Cover             string  `json:"cover"`
+	Platform1Position int     `json:"1"`
+	Platform2Position int     `json:"2"`
+	Platform3Position int     `json:"3"`
+}
+
 type Positions struct {
-	Platform1Position int `json:"1"`
-	Platform2Position int `json:"2"`
-	Platform3Position int `json:"3"`
+	Platform1Position int     `json:"1"`
+	Platform2Position int     `json:"2"`
+	Platform3Position int     `json:"3"`
+	Average           float64 `json:"average"`
 }
 
 type Header struct {
@@ -44,6 +59,16 @@ type Names struct {
 
 func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, array3 [][]string, name3 string, country string) {
 
+	jsonFile, err := os.Open("json/" + country + ".json")
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	var final Final
+	json.Unmarshal(byteValue, &final)
+
 	dt := time.Now()
 
 	finalNames := Names{
@@ -55,11 +80,11 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 	finalHeader := Header{
 		Country: country,
 		Date:    dt.Format("01-02-2006"),
-		Time:    dt.Format("15:04:05"),
+		Time:    dt.Format("15:04"),
 		Names:   finalNames,
 	}
 
-	finalsTracks := make([]Track, 0)
+	finalsTracksBeforeSort := make([]TrackBeforeSort, 0)
 	alreadyCkeck := []string{}
 
 	for i := 0; i < 100; i++ {
@@ -71,12 +96,14 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		for j := 0; j < len(array2); j++ {
 			if strings.ToLower(array1[i][1]) == strings.ToLower(array2[j][1]) {
 				platform2Position = float64(j + 1)
+				break
 			}
 		}
 
 		for k := 0; k < len(array3); k++ {
 			if strings.ToLower(array1[i][1]) == strings.ToLower(array3[k][1]) {
 				platform3Position = float64(k + 1)
+				break
 			}
 		}
 
@@ -93,21 +120,17 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		finalArtistName := array1[i][2]
 		finalCoverUrl := array1[i][3]
 
-		finalPosition := Positions{
+		finalTrackBeforeSort := TrackBeforeSort{
+			Position:          finalPositionGlobal,
+			Track:             finalTrackName,
+			Artist:            finalArtistName,
+			Cover:             finalCoverUrl,
 			Platform1Position: int(platform1Position),
 			Platform2Position: int(platform2Position),
 			Platform3Position: int(platform3Position),
 		}
 
-		finalTrack := Track{
-			Position:  finalPositionGlobal,
-			Track:     finalTrackName,
-			Artist:    finalArtistName,
-			Cover:     finalCoverUrl,
-			Positions: finalPosition,
-		}
-
-		finalsTracks = append(finalsTracks, finalTrack)
+		finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
 		alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[i][1]))
 	}
 
@@ -122,12 +145,14 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			for j := 0; j < len(array1); j++ {
 				if strings.ToLower(array2[i][1]) == strings.ToLower(array1[j][1]) {
 					platform1Position = float64(j + 1)
+					break
 				}
 			}
 
 			for k := 0; k < len(array3); k++ {
 				if strings.ToLower(array2[i][1]) == strings.ToLower(array3[k][1]) {
 					platform3Position = float64(k + 1)
+					break
 				}
 			}
 
@@ -144,21 +169,17 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			finalArtistName := array2[i][2]
 			finalCoverUrl := array2[i][3]
 
-			finalPosition := Positions{
+			finalTrackBeforeSort := TrackBeforeSort{
+				Position:          finalPositionGlobal,
+				Track:             finalTrackName,
+				Artist:            finalArtistName,
+				Cover:             finalCoverUrl,
 				Platform1Position: int(platform1Position),
 				Platform2Position: int(platform2Position),
 				Platform3Position: int(platform3Position),
 			}
 
-			finalTrack := Track{
-				Position:  finalPositionGlobal,
-				Track:     finalTrackName,
-				Artist:    finalArtistName,
-				Cover:     finalCoverUrl,
-				Positions: finalPosition,
-			}
-
-			finalsTracks = append(finalsTracks, finalTrack)
+			finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
 			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[i][1]))
 
 		}
@@ -176,12 +197,14 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			for j := 0; j < len(array1); j++ {
 				if strings.ToLower(array3[i][1]) == strings.ToLower(array1[j][1]) {
 					platform1Position = float64(j + 1)
+					break
 				}
 			}
 
 			for k := 0; k < len(array2); k++ {
 				if strings.ToLower(array3[i][1]) == strings.ToLower(array2[k][1]) {
 					platform2Position = float64(k + 1)
+					break
 				}
 			}
 
@@ -198,34 +221,71 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			finalArtistName := array3[i][2]
 			finalCoverUrl := array3[i][3]
 
-			finalPosition := Positions{
+			finalTrackBeforeSort := TrackBeforeSort{
+				Position:          finalPositionGlobal,
+				Track:             finalTrackName,
+				Artist:            finalArtistName,
+				Cover:             finalCoverUrl,
 				Platform1Position: int(platform1Position),
 				Platform2Position: int(platform2Position),
 				Platform3Position: int(platform3Position),
 			}
 
-			finalTrack := Track{
-				Position:  finalPositionGlobal,
-				Track:     finalTrackName,
-				Artist:    finalArtistName,
-				Cover:     finalCoverUrl,
-				Positions: finalPosition,
-			}
-
-			finalsTracks = append(finalsTracks, finalTrack)
+			finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
 			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[i][1]))
 
 		}
 
 	}
 
+	sort.Slice(finalsTracksBeforeSort, func(p, q int) bool {
+		return finalsTracksBeforeSort[p].Position < finalsTracksBeforeSort[q].Position
+	})
+
 	// encF := json.NewEncoder(os.Stdout)
 	// encF.SetIndent("", " ")
-	// encF.Encode(allfinalsINFOSJson)
+	// encF.Encode(allfinalsINFOSJson)$
+	finalsTracks := make([]Track, 0)
 
-	sort.Slice(finalsTracks, func(p, q int) bool {
-		return finalsTracks[p].Position < finalsTracks[q].Position
-	})
+	postion := 0
+	lastTrackPosition := 0.0
+	for i := 0; i < len(finalsTracksBeforeSort); i++ {
+		if finalsTracksBeforeSort[i].Position > lastTrackPosition {
+			postion++
+			finalPosition := Positions{
+				Platform1Position: finalsTracksBeforeSort[i].Platform1Position,
+				Platform2Position: finalsTracksBeforeSort[i].Platform2Position,
+				Platform3Position: finalsTracksBeforeSort[i].Platform3Position,
+				Average:           finalsTracksBeforeSort[i].Position,
+			}
+			finalTrack := Track{
+				Position:  postion,
+				Evolution: CheckEvolution(final, finalsTracksBeforeSort[i].Track, postion),
+				Track:     finalsTracksBeforeSort[i].Track,
+				Artist:    finalsTracksBeforeSort[i].Artist,
+				Cover:     finalsTracksBeforeSort[i].Cover,
+				Positions: finalPosition,
+			}
+			finalsTracks = append(finalsTracks, finalTrack)
+			lastTrackPosition = finalsTracksBeforeSort[i].Position
+		} else if finalsTracksBeforeSort[i].Position == lastTrackPosition {
+			finalPosition := Positions{
+				Platform1Position: finalsTracksBeforeSort[i].Platform1Position,
+				Platform2Position: finalsTracksBeforeSort[i].Platform2Position,
+				Platform3Position: finalsTracksBeforeSort[i].Platform3Position,
+				Average:           finalsTracksBeforeSort[i].Position,
+			}
+			finalTrack := Track{
+				Position:  postion,
+				Evolution: CheckEvolution(final, finalsTracksBeforeSort[i].Track, postion),
+				Track:     finalsTracksBeforeSort[i].Track,
+				Artist:    finalsTracksBeforeSort[i].Artist,
+				Cover:     finalsTracksBeforeSort[i].Cover,
+				Positions: finalPosition,
+			}
+			finalsTracks = append(finalsTracks, finalTrack)
+		}
+	}
 
 	finalJson := Final{
 		Header: finalHeader,
@@ -242,4 +302,23 @@ func WriteJSON(data Final, file string) {
 		log.Println("Could not create JSON")
 	}
 	_ = ioutil.WriteFile(file, dataFile, 0666)
+}
+
+func CheckEvolution(final Final, name string, position int) (response string) {
+	evolution := "N"
+	for i := 0; i < len(final.Tracks); i++ {
+		if strings.ToLower(name) == strings.ToLower(final.Tracks[i].Track) {
+			if position > final.Tracks[i].Position {
+				evolution = "+"
+				break
+			} else if position < final.Tracks[i].Position {
+				evolution = "-"
+				break
+			} else if position == final.Tracks[i].Position {
+				evolution = "="
+				break
+			}
+		}
+	}
+	return evolution
 }
