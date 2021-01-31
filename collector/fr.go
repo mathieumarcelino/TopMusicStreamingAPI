@@ -16,12 +16,11 @@ func Spotify() [][]string {
 
 	collectorSpotify.OnHTML(".chart-table tbody tr", func(element *colly.HTMLElement) {
 		if i < 100 {
-			infoPOSITIONSpotify := element.ChildText(".chart-table-position")
 			infoTRACKSpotify := utils.TrimStringTrack(element.ChildText(".chart-table-track strong"))
 			infoARTISTSpotify := utils.TrimStringArtist(element.ChildText(".chart-table-track span"))[3:]
 			infoCOVERSpotify := element.ChildAttr(".chart-table-image a img", "src")
 
-			infoSpotify := []string{infoPOSITIONSpotify, infoTRACKSpotify, infoARTISTSpotify, infoCOVERSpotify}
+			infoSpotify := []string{infoTRACKSpotify, infoARTISTSpotify, infoCOVERSpotify}
 
 			allInfosSpotify = append(allInfosSpotify, infoSpotify)
 		}
@@ -42,7 +41,6 @@ func AppleMusic() [][]string {
 
 	collectorAppleMusic.OnHTML(".songs-list .track .col-song .col-song__wrapper", func(element *colly.HTMLElement) {
 		if i < 100 {
-			infoPOSITIONAppleMusic := element.ChildText(".rank")
 			infoTRACKAppleMusic := utils.TrimStringTrack(element.ChildText(".song-wrapper .song-name-wrapper .song-name"))
 			infoARTISTAppleMusic := ""
 			infoCOVERAppleMusic := ""
@@ -54,7 +52,7 @@ func AppleMusic() [][]string {
 				infoCOVERAppleMusic = utils.TrimStringCoverAppleMusic(el.ChildAttr("source:nth-child(1)", "srcset"))
 			})
 
-			infoAppleMusic := []string{infoPOSITIONAppleMusic, infoTRACKAppleMusic, infoARTISTAppleMusic, infoCOVERAppleMusic}
+			infoAppleMusic := []string{infoTRACKAppleMusic, infoARTISTAppleMusic, infoCOVERAppleMusic}
 
 			allInfosAppleMusic = append(allInfosAppleMusic, infoAppleMusic)
 		}
@@ -76,12 +74,11 @@ func Deezer() [][]string {
 	collectorDeezer.OnHTML(".table-hover", func(element *colly.HTMLElement) {
 		element.ForEach("tbody tr", func(_ int, el *colly.HTMLElement) {
 			if i < 100 {
-				infoPOSITIONDeezer := el.ChildText("td:nth-child(1) span")
 				infoTRACKDeezer := utils.TrimStringTrack(el.ChildText("td:nth-child(3) strong a"))
 				infoARTISTDeezer := el.ChildText("td:nth-child(4) a")
 				infoCOVERDeezer := utils.TrimStringCoverDeezer(el.ChildAttr("td:nth-child(1)", "style"))
 
-				infoDeezer := []string{infoPOSITIONDeezer, infoTRACKDeezer, infoARTISTDeezer, infoCOVERDeezer}
+				infoDeezer := []string{infoTRACKDeezer, infoARTISTDeezer, infoCOVERDeezer}
 				allInfosDeezer = append(allInfosDeezer, infoDeezer)
 			}
 			i++

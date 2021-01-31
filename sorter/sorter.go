@@ -10,6 +10,8 @@ import (
 	"strings"
 	"time"
 	"topmusicstreaming/utils"
+
+	"github.com/masatana/go-textdistance"
 )
 
 type Final struct {
@@ -32,15 +34,15 @@ type TrackBeforeSort struct {
 	Track             string  `json:"track"`
 	Artist            string  `json:"artist"`
 	Cover             string  `json:"cover"`
-	Platform1Position int     `json:"1"`
-	Platform2Position int     `json:"2"`
-	Platform3Position int     `json:"3"`
+	Platform1Position int     `json:"p1"`
+	Platform2Position int     `json:"p2"`
+	Platform3Position int     `json:"p3"`
 }
 
 type Positions struct {
-	Platform1Position int     `json:"1"`
-	Platform2Position int     `json:"2"`
-	Platform3Position int     `json:"3"`
+	Platform1Position int     `json:"p1"`
+	Platform2Position int     `json:"p2"`
+	Platform3Position int     `json:"p3"`
 	Average           float64 `json:"average"`
 }
 
@@ -52,14 +54,15 @@ type Header struct {
 }
 
 type Names struct {
-	Platform1Name string `json:"1"`
-	Platform2Name string `json:"2"`
-	Platform3Name string `json:"3"`
+	Platform1Name string `json:"n1"`
+	Platform2Name string `json:"n2"`
+	Platform3Name string `json:"n3"`
 }
 
 func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, array3 [][]string, name3 string, country string) {
 
 	jsonFile, err := os.Open("json/" + country + ".json")
+	// jsonFile, err := os.Open("root/go/go-web/json/" + country + ".json")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -69,7 +72,8 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 	var final Final
 	json.Unmarshal(byteValue, &final)
 
-	dt := time.Now()
+	paris, _ := time.LoadLocation("Europe/Paris")
+	dt := time.Now().In(paris)
 
 	finalNames := Names{
 		Platform1Name: name1,
@@ -94,16 +98,22 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		platform3Position := 150.0
 
 		for j := 0; j < len(array2); j++ {
-			if strings.ToLower(array1[i][1]) == strings.ToLower(array2[j][1]) {
+			val := textdistance.JaroWinklerDistance(strings.ToLower(array1[i][0]), strings.ToLower(array2[j][0]))
+			if val == 1.0 {
 				platform2Position = float64(j + 1)
-				break
+			} else if val >= 0.8 && strings.ToLower(array1[i][1]) == strings.ToLower(array2[j][1]) {
+				platform2Position = float64(j + 1)
+				alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[j][0]))
 			}
 		}
 
 		for k := 0; k < len(array3); k++ {
-			if strings.ToLower(array1[i][1]) == strings.ToLower(array3[k][1]) {
+			val := textdistance.JaroWinklerDistance(strings.ToLower(array1[i][0]), strings.ToLower(array3[k][0]))
+			if val == 1.0 {
 				platform3Position = float64(k + 1)
-				break
+			} else if val >= 0.8 && strings.ToLower(array1[i][1]) == strings.ToLower(array3[k][1]) {
+				platform2Position = float64(k + 1)
+				alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[k][0]))
 			}
 		}
 
@@ -116,9 +126,9 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			platform3Position = 0
 		}
 
-		finalTrackName := array1[i][1]
-		finalArtistName := array1[i][2]
-		finalCoverUrl := array1[i][3]
+		finalTrackName := array1[i][0]
+		finalArtistName := array1[i][1]
+		finalCoverUrl := array1[i][2]
 
 		finalTrackBeforeSort := TrackBeforeSort{
 			Position:          finalPositionGlobal,
@@ -131,7 +141,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		}
 
 		finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
-		alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[i][1]))
+		alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[i][0]))
 	}
 
 	for i := 0; i < 100; i++ {
@@ -140,19 +150,25 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		platform1Position := 150.0
 		platform3Position := 150.0
 
-		if utils.StringInSlice(strings.ToLower(array2[i][1]), alreadyCkeck) == false {
+		if utils.StringInSlice(strings.ToLower(array2[i][0]), alreadyCkeck) == false {
 
 			for j := 0; j < len(array1); j++ {
-				if strings.ToLower(array2[i][1]) == strings.ToLower(array1[j][1]) {
+				val := textdistance.JaroWinklerDistance(strings.ToLower(array2[i][0]), strings.ToLower(array1[j][0]))
+				if val == 1.0 {
 					platform1Position = float64(j + 1)
-					break
+				} else if val >= 0.8 && strings.ToLower(array2[i][1]) == strings.ToLower(array1[j][1]) {
+					platform2Position = float64(j + 1)
+					alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[j][0]))
 				}
 			}
 
 			for k := 0; k < len(array3); k++ {
-				if strings.ToLower(array2[i][1]) == strings.ToLower(array3[k][1]) {
+				val := textdistance.JaroWinklerDistance(strings.ToLower(array2[i][0]), strings.ToLower(array3[k][0]))
+				if val == 1.0 {
 					platform3Position = float64(k + 1)
-					break
+				} else if val >= 0.8 && strings.ToLower(array2[i][1]) == strings.ToLower(array3[k][1]) {
+					platform2Position = float64(k + 1)
+					alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[k][0]))
 				}
 			}
 
@@ -165,9 +181,9 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 				platform3Position = 0
 			}
 
-			finalTrackName := array2[i][1]
-			finalArtistName := array2[i][2]
-			finalCoverUrl := array2[i][3]
+			finalTrackName := array2[i][0]
+			finalArtistName := array2[i][1]
+			finalCoverUrl := array2[i][2]
 
 			finalTrackBeforeSort := TrackBeforeSort{
 				Position:          finalPositionGlobal,
@@ -180,7 +196,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			}
 
 			finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
-			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[i][1]))
+			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[i][0]))
 
 		}
 
@@ -192,19 +208,25 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		platform1Position := 150.0
 		platform2Position := 150.0
 
-		if utils.StringInSlice(strings.ToLower(array3[i][1]), alreadyCkeck) == false {
+		if utils.StringInSlice(strings.ToLower(array3[i][0]), alreadyCkeck) == false {
 
 			for j := 0; j < len(array1); j++ {
-				if strings.ToLower(array3[i][1]) == strings.ToLower(array1[j][1]) {
+				val := textdistance.JaroWinklerDistance(strings.ToLower(array3[i][0]), strings.ToLower(array1[j][0]))
+				if val == 1.0 {
 					platform1Position = float64(j + 1)
-					break
+				} else if val >= 0.8 && strings.ToLower(array3[i][1]) == strings.ToLower(array1[j][1]) {
+					platform2Position = float64(j + 1)
+					alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[j][0]))
 				}
 			}
 
 			for k := 0; k < len(array2); k++ {
-				if strings.ToLower(array3[i][1]) == strings.ToLower(array2[k][1]) {
+				val := textdistance.JaroWinklerDistance(strings.ToLower(array3[i][0]), strings.ToLower(array2[k][0]))
+				if val == 1.0 {
 					platform2Position = float64(k + 1)
-					break
+				} else if val >= 0.8 && strings.ToLower(array3[i][1]) == strings.ToLower(array2[k][1]) {
+					platform2Position = float64(k + 1)
+					alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[k][0]))
 				}
 			}
 
@@ -217,9 +239,9 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 				platform2Position = 0
 			}
 
-			finalTrackName := array3[i][1]
-			finalArtistName := array3[i][2]
-			finalCoverUrl := array3[i][3]
+			finalTrackName := array3[i][0]
+			finalArtistName := array3[i][1]
+			finalCoverUrl := array3[i][2]
 
 			finalTrackBeforeSort := TrackBeforeSort{
 				Position:          finalPositionGlobal,
@@ -232,7 +254,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			}
 
 			finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
-			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[i][1]))
+			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[i][0]))
 
 		}
 
@@ -242,16 +264,13 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		return finalsTracksBeforeSort[p].Position < finalsTracksBeforeSort[q].Position
 	})
 
-	// encF := json.NewEncoder(os.Stdout)
-	// encF.SetIndent("", " ")
-	// encF.Encode(allfinalsINFOSJson)$
 	finalsTracks := make([]Track, 0)
 
-	postion := 0
+	position := 0
 	lastTrackPosition := 0.0
 	for i := 0; i < len(finalsTracksBeforeSort); i++ {
-		if finalsTracksBeforeSort[i].Position > lastTrackPosition {
-			postion++
+		if finalsTracksBeforeSort[i].Position > lastTrackPosition && position < 100 {
+			position++
 			finalPosition := Positions{
 				Platform1Position: finalsTracksBeforeSort[i].Platform1Position,
 				Platform2Position: finalsTracksBeforeSort[i].Platform2Position,
@@ -259,8 +278,8 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 				Average:           finalsTracksBeforeSort[i].Position,
 			}
 			finalTrack := Track{
-				Position:  postion,
-				Evolution: CheckEvolution(final, finalsTracksBeforeSort[i].Track, postion),
+				Position:  position,
+				Evolution: CheckEvolution(final, finalsTracksBeforeSort[i].Track, position),
 				Track:     finalsTracksBeforeSort[i].Track,
 				Artist:    finalsTracksBeforeSort[i].Artist,
 				Cover:     finalsTracksBeforeSort[i].Cover,
@@ -276,14 +295,16 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 				Average:           finalsTracksBeforeSort[i].Position,
 			}
 			finalTrack := Track{
-				Position:  postion,
-				Evolution: CheckEvolution(final, finalsTracksBeforeSort[i].Track, postion),
+				Position:  position,
+				Evolution: CheckEvolution(final, finalsTracksBeforeSort[i].Track, position),
 				Track:     finalsTracksBeforeSort[i].Track,
 				Artist:    finalsTracksBeforeSort[i].Artist,
 				Cover:     finalsTracksBeforeSort[i].Cover,
 				Positions: finalPosition,
 			}
 			finalsTracks = append(finalsTracks, finalTrack)
+		} else {
+			break
 		}
 	}
 
@@ -293,7 +314,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 	}
 
 	WriteJSON(finalJson, "json/"+country+".json")
-	// WriteJSON(allfinalsINFOSJson, "root/go/go-web/json/"+country+".json")
+	// WriteJSON(finalJson, "root/go/go-web/json/"+country+".json")
 }
 
 func WriteJSON(data Final, file string) {
@@ -309,10 +330,10 @@ func CheckEvolution(final Final, name string, position int) (response string) {
 	for i := 0; i < len(final.Tracks); i++ {
 		if strings.ToLower(name) == strings.ToLower(final.Tracks[i].Track) {
 			if position > final.Tracks[i].Position {
-				evolution = "+"
+				evolution = "-"
 				break
 			} else if position < final.Tracks[i].Position {
-				evolution = "-"
+				evolution = "+"
 				break
 			} else if position == final.Tracks[i].Position {
 				evolution = "="
