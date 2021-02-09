@@ -1,4 +1,4 @@
-package collectorfr
+package collectores
 
 import (
 	"topmusicstreaming/utils"
@@ -27,7 +27,7 @@ func Spotify() [][]string {
 		i++
 	})
 
-	collectorSpotify.Visit("https://spotifycharts.com/regional/fr/daily/latest")
+	collectorSpotify.Visit("https://spotifycharts.com/regional/es/daily/latest")
 	return allInfosSpotify
 }
 
@@ -59,7 +59,7 @@ func AppleMusic() [][]string {
 		i++
 	})
 
-	collectorAppleMusic.Visit("https://music.apple.com/fr/playlist/le-top-100-france/pl.6e8cfd81d51042648fa36c9df5236b8d")
+	collectorAppleMusic.Visit("https://music.apple.com/fr/playlist/le-top-100-espagne/pl.0d656d7feae64198bc5fb1b02786ed75")
 	return allInfosAppleMusic
 }
 
@@ -68,24 +68,25 @@ func Deezer() [][]string {
 	i := 0
 
 	collectorDeezer := colly.NewCollector(
-		colly.AllowedDomains("www.chartsmusic.fr"),
+		colly.AllowedDomains("kworb.net"),
 	)
 
-	collectorDeezer.OnHTML(".table-hover", func(element *colly.HTMLElement) {
+	collectorDeezer.OnHTML(".sortable", func(element *colly.HTMLElement) {
 		element.ForEach("tbody tr", func(_ int, el *colly.HTMLElement) {
 			if i < 100 {
-				infoTRACKDeezer := utils.TrimStringTrack(el.ChildText("td:nth-child(3) strong a"))
-				infoARTISTDeezer := el.ChildText("td:nth-child(4) a")
-				infoCOVERDeezer := utils.TrimStringCoverDeezer(el.ChildAttr("td:nth-child(1)", "style"))
+				infoTRACKDeezer := utils.TrimStringTrackDeezer(el.ChildText(".mp div"))
+				infoARTISTDeezer := utils.TrimStringArtistDeezer(el.ChildText(".mp div"))
+				infoCOVERDeezer := ""
 
 				infoDeezer := []string{infoTRACKDeezer, infoARTISTDeezer, infoCOVERDeezer}
+
 				allInfosDeezer = append(allInfosDeezer, infoDeezer)
 			}
 			i++
 		})
 
 	})
-	collectorDeezer.Visit("https://www.chartsmusic.fr/deezer")
+	collectorDeezer.Visit("https://kworb.net/charts/deezer/es.html")
 
 	return allInfosDeezer
 }

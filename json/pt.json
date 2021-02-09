@@ -1,0 +1,1561 @@
+{
+ "header": {
+  "country": "pt",
+  "date": "02-02-2021",
+  "time": "14:07",
+  "names": {
+   "n1": "spotify",
+   "n2": "applemusic",
+   "n3": "deezer"
+  }
+ },
+ "tracks": [
+  {
+   "position": 1,
+   "evolution": "N",
+   "track": "drivers license",
+   "artist": "Olivia Rodrigo",
+   "cover": "https://i.scdn.co/image/ab67616d0000485159779689e1d9c15ca2f76b84",
+   "positions": {
+    "p1": 1,
+    "p2": 1,
+    "p3": 5,
+    "average": 2.3333333333333335
+   }
+  },
+  {
+   "position": 2,
+   "evolution": "N",
+   "track": "Lisabona",
+   "artist": "Plutónio",
+   "cover": "https://i.scdn.co/image/ab67616d00004851444819743ae537ea59391d1a",
+   "positions": {
+    "p1": 3,
+    "p2": 5,
+    "p3": 14,
+    "average": 7.333333333333333
+   }
+  },
+  {
+   "position": 3,
+   "evolution": "N",
+   "track": "Blinding Lights",
+   "artist": "The Weeknd",
+   "cover": "https://i.scdn.co/image/ab67616d000048518863bc11d2aa12b54f5aeb36",
+   "positions": {
+    "p1": 12,
+    "p2": 11,
+    "p3": 4,
+    "average": 9
+   }
+  },
+  {
+   "position": 4,
+   "evolution": "N",
+   "track": "inesquecível",
+   "artist": "Giulia Be",
+   "cover": "https://i.scdn.co/image/ab67616d0000485153cf53c0c91fdb1aa05787f2",
+   "positions": {
+    "p1": 9,
+    "p2": 7,
+    "p3": 13,
+    "average": 9.666666666666666
+   }
+  },
+  {
+   "position": 5,
+   "evolution": "N",
+   "track": "Perseus",
+   "artist": "Wet Bed Gang",
+   "cover": "https://i.scdn.co/image/ab67616d00004851141b4012f7ae0bb593392cb6",
+   "positions": {
+    "p1": 2,
+    "p2": 2,
+    "p3": 26,
+    "average": 10
+   }
+  },
+  {
+   "position": 6,
+   "evolution": "N",
+   "track": "MODO TURBO",
+   "artist": "Luísa Sonza",
+   "cover": "https://i.scdn.co/image/ab67616d0000485180e57d775b4ef531116ecdca",
+   "positions": {
+    "p1": 16,
+    "p2": 3,
+    "p3": 12,
+    "average": 10.333333333333334
+   }
+  },
+  {
+   "position": 7,
+   "evolution": "N",
+   "track": "Mds",
+   "artist": "Kawe",
+   "cover": "https://i.scdn.co/image/ab67616d00004851c2da249c6529dc48351a734b",
+   "positions": {
+    "p1": 4,
+    "p2": 6,
+    "p3": 24,
+    "average": 11.333333333333334
+   }
+  },
+  {
+   "position": 8,
+   "evolution": "N",
+   "track": "DÁKITI",
+   "artist": "Bad Bunny",
+   "cover": "https://i.scdn.co/image/ab67616d00004851005ee342f4eef2cc6e8436ab",
+   "positions": {
+    "p1": 10,
+    "p2": 10,
+    "p3": 23,
+    "average": 14.333333333333334
+   }
+  },
+  {
+   "position": 9,
+   "evolution": "N",
+   "track": "WITHOUT YOU",
+   "artist": "The Kid LAROI",
+   "cover": "https://i.scdn.co/image/ab67616d00004851df16d539f508603bfb1efe02",
+   "positions": {
+    "p1": 11,
+    "p2": 17,
+    "p3": 16,
+    "average": 14.666666666666666
+   }
+  },
+  {
+   "position": 10,
+   "evolution": "N",
+   "track": "Te Amo",
+   "artist": "Calema",
+   "cover": "https://i.scdn.co/image/ab67616d000048519421b696928fc4c63ec5f35e",
+   "positions": {
+    "p1": 21,
+    "p2": 13,
+    "p3": 22,
+    "average": 18.666666666666668
+   }
+  },
+  {
+   "position": 11,
+   "evolution": "N",
+   "track": "Lonely",
+   "artist": "Justin Bieber",
+   "cover": "https://i.scdn.co/image/ab67616d0000485183b22beb73e2014b20159685",
+   "positions": {
+    "p1": 22,
+    "p2": 14,
+    "p3": 27,
+    "average": 21
+   }
+  },
+  {
+   "position": 12,
+   "evolution": "N",
+   "track": "Hawái",
+   "artist": "Maluma",
+   "cover": "https://i.scdn.co/image/ab67616d0000485187d15f78ec75621d40028baf",
+   "positions": {
+    "p1": 38,
+    "p2": 12,
+    "p3": 19,
+    "average": 23
+   }
+  },
+  {
+   "position": 13,
+   "evolution": "N",
+   "track": "Streets",
+   "artist": "Doja Cat",
+   "cover": "https://i.scdn.co/image/ab67616d0000485182b243023b937fd579a35533",
+   "positions": {
+    "p1": 33,
+    "p2": 8,
+    "p3": 29,
+    "average": 23.333333333333332
+   }
+  },
+  {
+   "position": 14,
+   "evolution": "N",
+   "track": "Mood",
+   "artist": "24kGoldn",
+   "cover": "https://i.scdn.co/image/ab67616d00004851ff8c985ecb3b7c5f847be357",
+   "positions": {
+    "p1": 7,
+    "p2": 33,
+    "p3": 31,
+    "average": 23.666666666666668
+   }
+  },
+  {
+   "position": 15,
+   "evolution": "N",
+   "track": "Watermelon Sugar",
+   "artist": "Harry Styles",
+   "cover": "https://i.scdn.co/image/ab67616d0000485177fdcfda6535601aff081b6a",
+   "positions": {
+    "p1": 32,
+    "p2": 23,
+    "p3": 25,
+    "average": 26.666666666666668
+   }
+  },
+  {
+   "position": 16,
+   "evolution": "N",
+   "track": "positions",
+   "artist": "Ariana Grande",
+   "cover": "https://i.scdn.co/image/ab67616d000048515ef878a782c987d38d82b605",
+   "positions": {
+    "p1": 29,
+    "p2": 18,
+    "p3": 42,
+    "average": 29.666666666666668
+   }
+  },
+  {
+   "position": 16,
+   "evolution": "N",
+   "track": "Whoopty",
+   "artist": "CJ",
+   "cover": "https://i.scdn.co/image/ab67616d000048519ad6e9cfa9573b5933d3f9bb",
+   "positions": {
+    "p1": 15,
+    "p2": 24,
+    "p3": 50,
+    "average": 29.666666666666668
+   }
+  },
+  {
+   "position": 17,
+   "evolution": "N",
+   "track": "Borboletas",
+   "artist": "Gama WNTD",
+   "cover": "https://i.scdn.co/image/ab67616d0000485190dca594272a2920e9e43c4c",
+   "positions": {
+    "p1": 8,
+    "p2": 9,
+    "p3": 73,
+    "average": 30
+   }
+  },
+  {
+   "position": 18,
+   "evolution": "N",
+   "track": "Monster",
+   "artist": "Shawn Mendes",
+   "cover": "https://i.scdn.co/image/ab67616d0000485137a5a19e52f8260b3b158e55",
+   "positions": {
+    "p1": 24,
+    "p2": 15,
+    "p3": 59,
+    "average": 32.666666666666664
+   }
+  },
+  {
+   "position": 19,
+   "evolution": "N",
+   "track": "Save Your Tears",
+   "artist": "The Weeknd",
+   "cover": "https://i.scdn.co/image/ab67616d000048518863bc11d2aa12b54f5aeb36",
+   "positions": {
+    "p1": 40,
+    "p2": 38,
+    "p3": 45,
+    "average": 41
+   }
+  },
+  {
+   "position": 20,
+   "evolution": "N",
+   "track": "Lemonade",
+   "artist": "Internet Money",
+   "cover": "https://i.scdn.co/image/ab67616d000048519ca0c952f130e28025209cf0",
+   "positions": {
+    "p1": 6,
+    "p2": 74,
+    "p3": 46,
+    "average": 42
+   }
+  },
+  {
+   "position": 20,
+   "evolution": "N",
+   "track": "Fica",
+   "artist": "Domingues",
+   "cover": "https://i.scdn.co/image/ab67616d000048512530f8044c155a426b896006",
+   "positions": {
+    "p1": 13,
+    "p2": 28,
+    "p3": 85,
+    "average": 42
+   }
+  },
+  {
+   "position": 21,
+   "evolution": "N",
+   "track": "Therefore I Am",
+   "artist": "Billie Eilish",
+   "cover": "https://i.scdn.co/image/ab67616d00004851fec5ef9f3133aff71c525acc",
+   "positions": {
+    "p1": 49,
+    "p2": 54,
+    "p3": 28,
+    "average": 43.666666666666664
+   }
+  },
+  {
+   "position": 21,
+   "evolution": "N",
+   "track": "Amor ou o Litrão",
+   "artist": "Petter Ferraz",
+   "cover": "https://i.scdn.co/image/ab67616d000048512a879b8a4ea7d9723519caec",
+   "positions": {
+    "p1": 23,
+    "p2": 53,
+    "p3": 55,
+    "average": 43.666666666666664
+   }
+  },
+  {
+   "position": 22,
+   "evolution": "N",
+   "track": "Jerusalema",
+   "artist": "Master KG",
+   "cover": "https://i.scdn.co/image/ab67616d000048519f498eeb76b82ca644bcbdc5",
+   "positions": {
+    "p1": 91,
+    "p2": 27,
+    "p3": 17,
+    "average": 45
+   }
+  },
+  {
+   "position": 23,
+   "evolution": "N",
+   "track": "menina solta",
+   "artist": "Giulia Be",
+   "cover": "https://i.scdn.co/image/ab67616d000048516e1d895aa85c716492611744",
+   "positions": {
+    "p1": 66,
+    "p2": 35,
+    "p3": 41,
+    "average": 47.333333333333336
+   }
+  },
+  {
+   "position": 24,
+   "evolution": "N",
+   "track": "Dynamite",
+   "artist": "BTS",
+   "cover": "https://i.scdn.co/image/ab67616d000048513deb4b0115410a85afe31c29",
+   "positions": {
+    "p1": 73,
+    "p2": 58,
+    "p3": 18,
+    "average": 49.666666666666664
+   }
+  },
+  {
+   "position": 24,
+   "evolution": "N",
+   "track": "Don't Start Now",
+   "artist": "Dua Lipa",
+   "cover": "https://i.scdn.co/image/ab67616d00004851cda2c6ad6272aea9c5811a49",
+   "positions": {
+    "p1": 65,
+    "p2": 48,
+    "p3": 36,
+    "average": 49.666666666666664
+   }
+  },
+  {
+   "position": 25,
+   "evolution": "N",
+   "track": "ROCKSTAR",
+   "artist": "DaBaby",
+   "cover": "https://i.scdn.co/image/ab67616d0000485120e08c8cc23f404d723b5647",
+   "positions": {
+    "p1": 31,
+    "p2": 72,
+    "p3": 48,
+    "average": 50.333333333333336
+   }
+  },
+  {
+   "position": 26,
+   "evolution": "N",
+   "track": "Hecha Pa' Mi",
+   "artist": "Boza",
+   "cover": "https://i.scdn.co/image/ab67616d000048515921096535733d90092393b6",
+   "positions": {
+    "p1": 39,
+    "p2": 21,
+    "p3": 93,
+    "average": 51
+   }
+  },
+  {
+   "position": 27,
+   "evolution": "N",
+   "track": "Someone You Loved",
+   "artist": "Lewis Capaldi",
+   "cover": "https://i.scdn.co/image/ab67616d00004851fc2101e6889d6ce9025f85f2",
+   "positions": {
+    "p1": 48,
+    "p2": 41,
+    "p3": 74,
+    "average": 54.333333333333336
+   }
+  },
+  {
+   "position": 28,
+   "evolution": "N",
+   "track": "Breaking Me",
+   "artist": "Topic",
+   "cover": "https://i.scdn.co/image/ab67616d00004851ca801dab96017456b9847ac2",
+   "positions": {
+    "p1": 52,
+    "p2": 81,
+    "p3": 43,
+    "average": 58.666666666666664
+   }
+  },
+  {
+   "position": 28,
+   "evolution": "N",
+   "track": "lovely",
+   "artist": "Billie Eilish",
+   "cover": "https://i.scdn.co/image/ab67616d000048518a3f0a3ca7929dea23cd274c",
+   "positions": {
+    "p1": 79,
+    "p2": 44,
+    "p3": 53,
+    "average": 58.666666666666664
+   }
+  },
+  {
+   "position": 29,
+   "evolution": "N",
+   "track": "São Paulo",
+   "artist": "Yuri NR5",
+   "cover": "https://i.scdn.co/image/ab67616d00004851f30984a78aa6f7d439658451",
+   "positions": {
+    "p1": 5,
+    "p2": 22,
+    "p3": 0,
+    "average": 59
+   }
+  },
+  {
+   "position": 30,
+   "evolution": "N",
+   "track": "Head \u0026 Heart",
+   "artist": "Joel Corry",
+   "cover": "https://i.scdn.co/image/ab67616d0000485191e93c59bacfe819db9601eb",
+   "positions": {
+    "p1": 47,
+    "p2": 61,
+    "p3": 70,
+    "average": 59.333333333333336
+   }
+  },
+  {
+   "position": 31,
+   "evolution": "N",
+   "track": "Sweater Weather",
+   "artist": "The Neighbourhood",
+   "cover": "https://i.scdn.co/image/ab67616d0000485178f71c0d2fe34592a3c18f80",
+   "positions": {
+    "p1": 61,
+    "p2": 96,
+    "p3": 34,
+    "average": 63.666666666666664
+   }
+  },
+  {
+   "position": 32,
+   "evolution": "N",
+   "track": "Good Days",
+   "artist": "SZA",
+   "cover": "https://i.scdn.co/image/ab67616d000048513097b1375ab17ae5bf302a0a",
+   "positions": {
+    "p1": 26,
+    "p2": 16,
+    "p3": 0,
+    "average": 64
+   }
+  },
+  {
+   "position": 33,
+   "evolution": "N",
+   "track": "For The Night",
+   "artist": "Pop Smoke",
+   "cover": "https://i.scdn.co/image/ab67616d0000485177ada0863603903f57b34369",
+   "positions": {
+    "p1": 17,
+    "p2": 26,
+    "p3": 0,
+    "average": 64.33333333333333
+   }
+  },
+  {
+   "position": 33,
+   "evolution": "N",
+   "track": "Romance de Cinema",
+   "artist": "Domingues",
+   "cover": "https://i.scdn.co/image/ab67616d000048518cede482e7c44e11c7bbed60",
+   "positions": {
+    "p1": 18,
+    "p2": 25,
+    "p3": 0,
+    "average": 64.33333333333333
+   }
+  },
+  {
+   "position": 34,
+   "evolution": "N",
+   "track": "WAP",
+   "artist": "Cardi B",
+   "cover": "https://i.scdn.co/image/ab67616d00004851c450c89d3eb750d3535b0a0c",
+   "positions": {
+    "p1": 83,
+    "p2": 43,
+    "p3": 72,
+    "average": 66
+   }
+  },
+  {
+   "position": 35,
+   "evolution": "N",
+   "track": "O Nosso Amor",
+   "artist": "Soraia Ramos",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 29,
+    "p3": 20,
+    "average": 66.33333333333333
+   }
+  },
+  {
+   "position": 36,
+   "evolution": "N",
+   "track": "Train Wreck",
+   "artist": "James Arthur",
+   "cover": "https://i.scdn.co/image/ab67616d0000485120beb61f61fcbeb33b10a9ab",
+   "positions": {
+    "p1": 99,
+    "p2": 31,
+    "p3": 71,
+    "average": 67
+   }
+  },
+  {
+   "position": 37,
+   "evolution": "N",
+   "track": "Prisoner",
+   "artist": "Miley Cyrus",
+   "cover": "https://i.scdn.co/image/ab67616d000048518cffb7c6c40759eaf8a5a142",
+   "positions": {
+    "p1": 96,
+    "p2": 32,
+    "p3": 75,
+    "average": 67.66666666666667
+   }
+  },
+  {
+   "position": 37,
+   "evolution": "N",
+   "track": "34+35",
+   "artist": "Ariana Grande",
+   "cover": "https://i.scdn.co/image/ab67616d000048515ef878a782c987d38d82b605",
+   "positions": {
+    "p1": 54,
+    "p2": 57,
+    "p3": 92,
+    "average": 67.66666666666667
+   }
+  },
+  {
+   "position": 38,
+   "evolution": "N",
+   "track": "Bem-Disposto",
+   "artist": "Rony Fuego",
+   "cover": "https://i.scdn.co/image/ab67616d000048518e63f798d9414f4c9b41df81",
+   "positions": {
+    "p1": 20,
+    "p2": 34,
+    "p3": 0,
+    "average": 68
+   }
+  },
+  {
+   "position": 39,
+   "evolution": "N",
+   "track": "Tequila - A COLORS SHOW",
+   "artist": "Nenny",
+   "cover": "https://i.scdn.co/image/ab67616d00004851cd58d3824ac87ced87ba971c",
+   "positions": {
+    "p1": 51,
+    "p2": 4,
+    "p3": 0,
+    "average": 68.33333333333333
+   }
+  },
+  {
+   "position": 40,
+   "evolution": "N",
+   "track": "Tinoni",
+   "artist": "T-Rex",
+   "cover": "https://i.scdn.co/image/ab67616d00004851718daea364a849edfca2c569",
+   "positions": {
+    "p1": 19,
+    "p2": 37,
+    "p3": 0,
+    "average": 68.66666666666667
+   }
+  },
+  {
+   "position": 41,
+   "evolution": "N",
+   "track": "The City is a Jungle",
+   "artist": "Fumaxa",
+   "cover": "https://i.scdn.co/image/ab67616d00004851506ec435d05853011eb361f0",
+   "positions": {
+    "p1": 37,
+    "p2": 20,
+    "p3": 0,
+    "average": 69
+   }
+  },
+  {
+   "position": 42,
+   "evolution": "N",
+   "track": "Dance Monkey",
+   "artist": "Tones And I",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 55,
+    "p3": 21,
+    "average": 75.33333333333333
+   }
+  },
+  {
+   "position": 43,
+   "evolution": "N",
+   "track": "bad guy",
+   "artist": "Billie Eilish",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 66,
+    "p3": 11,
+    "average": 75.66666666666667
+   }
+  },
+  {
+   "position": 44,
+   "evolution": "N",
+   "track": "Mood Swings",
+   "artist": "Pop Smoke",
+   "cover": "https://i.scdn.co/image/ab67616d0000485177ada0863603903f57b34369",
+   "positions": {
+    "p1": 28,
+    "p2": 52,
+    "p3": 0,
+    "average": 76.66666666666667
+   }
+  },
+  {
+   "position": 45,
+   "evolution": "N",
+   "track": "M4",
+   "artist": "Teto",
+   "cover": "https://i.scdn.co/image/ab67616d0000485165df444b210786c270a05a97",
+   "positions": {
+    "p1": 30,
+    "p2": 51,
+    "p3": 0,
+    "average": 77
+   }
+  },
+  {
+   "position": 46,
+   "evolution": "N",
+   "track": "Lo Vas A Olvidar",
+   "artist": "Billie Eilish",
+   "cover": "https://i.scdn.co/image/ab67616d00004851c64ed7bab63186d7fca3012f",
+   "positions": {
+    "p1": 64,
+    "p2": 19,
+    "p3": 0,
+    "average": 77.66666666666667
+   }
+  },
+  {
+   "position": 47,
+   "evolution": "N",
+   "track": "Before You Go",
+   "artist": "Lewis Capaldi",
+   "cover": "https://i.scdn.co/image/ab67616d000048517b9639babbe96e25071ec1d4",
+   "positions": {
+    "p1": 69,
+    "p2": 71,
+    "p3": 98,
+    "average": 79.33333333333333
+   }
+  },
+  {
+   "position": 48,
+   "evolution": "N",
+   "track": "Loco",
+   "artist": "Anitta",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 42,
+    "p3": 47,
+    "average": 79.66666666666667
+   }
+  },
+  {
+   "position": 49,
+   "evolution": "N",
+   "track": "Paradise",
+   "artist": "MEDUZA",
+   "cover": "https://i.scdn.co/image/ab67616d00004851b6567be9f8b996a2b5f9b7fa",
+   "positions": {
+    "p1": 46,
+    "p2": 45,
+    "p3": 0,
+    "average": 80.33333333333333
+   }
+  },
+  {
+   "position": 50,
+   "evolution": "N",
+   "track": "What You Know Bout Love",
+   "artist": "Pop Smoke",
+   "cover": "https://i.scdn.co/image/ab67616d0000485177ada0863603903f57b34369",
+   "positions": {
+    "p1": 25,
+    "p2": 0,
+    "p3": 68,
+    "average": 81
+   }
+  },
+  {
+   "position": 51,
+   "evolution": "N",
+   "track": "Anyone",
+   "artist": "Justin Bieber",
+   "cover": "https://i.scdn.co/image/ab67616d000048514b02db5cefb177ff97346cf2",
+   "positions": {
+    "p1": 60,
+    "p2": 36,
+    "p3": 0,
+    "average": 82
+   }
+  },
+  {
+   "position": 52,
+   "evolution": "N",
+   "track": "Angels Like You",
+   "artist": "Miley Cyrus",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 99,
+    "p3": 10,
+    "average": 86.33333333333333
+   }
+  },
+  {
+   "position": 52,
+   "evolution": "N",
+   "track": "O Pai Ta On",
+   "artist": "Greg Ferreira",
+   "cover": "https://i.scdn.co/image/ab67616d00004851c92d5e1f9d383abf87b0dc71",
+   "positions": {
+    "p1": 14,
+    "p2": 95,
+    "p3": 0,
+    "average": 86.33333333333333
+   }
+  },
+  {
+   "position": 52,
+   "evolution": "N",
+   "track": "Mistura",
+   "artist": "Julinho Ksd",
+   "cover": "https://i.scdn.co/image/ab67616d00004851a0edf33fd1eec34b6052705c",
+   "positions": {
+    "p1": 59,
+    "p2": 50,
+    "p3": 0,
+    "average": 86.33333333333333
+   }
+  },
+  {
+   "position": 52,
+   "evolution": "N",
+   "track": "UN DIA",
+   "artist": "J Balvin",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 30,
+    "p3": 79,
+    "average": 86.33333333333333
+   }
+  },
+  {
+   "position": 53,
+   "evolution": "N",
+   "track": "you broke me first",
+   "artist": "Tate McRae",
+   "cover": "https://i.scdn.co/image/ab67616d000048510c2c97099fd6a637ed0aa4a4",
+   "positions": {
+    "p1": 42,
+    "p2": 68,
+    "p3": 0,
+    "average": 86.66666666666667
+   }
+  },
+  {
+   "position": 53,
+   "evolution": "N",
+   "track": "00 Fala Bonito",
+   "artist": "Papillon",
+   "cover": "https://i.scdn.co/image/ab67616d0000485112a4022545f938d92a1bd582",
+   "positions": {
+    "p1": 27,
+    "p2": 83,
+    "p3": 0,
+    "average": 86.66666666666667
+   }
+  },
+  {
+   "position": 54,
+   "evolution": "N",
+   "track": "Baila Conmigo",
+   "artist": "Selena Gomez",
+   "cover": "https://i.scdn.co/image/ab67616d00004851bb607a63a7dceb48b4d189e3",
+   "positions": {
+    "p1": 76,
+    "p2": 40,
+    "p3": 0,
+    "average": 88.66666666666667
+   }
+  },
+  {
+   "position": 55,
+   "evolution": "N",
+   "track": "Levitating",
+   "artist": "Dua Lipa",
+   "cover": "https://i.scdn.co/image/ab67616d00004851ba1fe13f70fffa7430cb3cd1",
+   "positions": {
+    "p1": 68,
+    "p2": 49,
+    "p3": 0,
+    "average": 89
+   }
+  },
+  {
+   "position": 56,
+   "evolution": "N",
+   "track": "The Business",
+   "artist": "Tiësto",
+   "cover": "https://i.scdn.co/image/ab67616d00004851f461bbc21a9bcec43a926973",
+   "positions": {
+    "p1": 56,
+    "p2": 63,
+    "p3": 0,
+    "average": 89.66666666666667
+   }
+  },
+  {
+   "position": 56,
+   "evolution": "N",
+   "track": "Laugh Now Cry Later",
+   "artist": "Drake",
+   "cover": "https://i.scdn.co/image/ab67616d0000485152c75ed37313b889447011ef",
+   "positions": {
+    "p1": 43,
+    "p2": 0,
+    "p3": 76,
+    "average": 89.66666666666667
+   }
+  },
+  {
+   "position": 57,
+   "evolution": "N",
+   "track": "Savage Love",
+   "artist": "Jawsh 685",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 85,
+    "p3": 35,
+    "average": 90
+   }
+  },
+  {
+   "position": 58,
+   "evolution": "N",
+   "track": "Skin",
+   "artist": "Sabrina Carpenter",
+   "cover": "https://i.scdn.co/image/ab67616d000048512b2473f0d8c4ea75d62fba09",
+   "positions": {
+    "p1": 75,
+    "p2": 47,
+    "p3": 0,
+    "average": 90.66666666666667
+   }
+  },
+  {
+   "position": 59,
+   "evolution": "N",
+   "track": "Gravity",
+   "artist": "Brent Faiyaz",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 79,
+    "p3": 44,
+    "average": 91
+   }
+  },
+  {
+   "position": 60,
+   "evolution": "N",
+   "track": "Roses - Imanbek Remix",
+   "artist": "SAINt JHN",
+   "cover": "https://i.scdn.co/image/ab67616d00004851401883269b2ca70bc343a7d0",
+   "positions": {
+    "p1": 85,
+    "p2": 40,
+    "p3": 0,
+    "average": 91.66666666666667
+   }
+  },
+  {
+   "position": 60,
+   "evolution": "N",
+   "track": "GIRL LIKE ME",
+   "artist": "Black Eyed Peas",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 87,
+    "p3": 38,
+    "average": 91.66666666666667
+   }
+  },
+  {
+   "position": 61,
+   "evolution": "N",
+   "track": "Mudo de Vida",
+   "artist": "Timor YSF",
+   "cover": "https://i.scdn.co/image/ab67616d000048518586ce734eb3a158b76ad4a0",
+   "positions": {
+    "p1": 44,
+    "p2": 86,
+    "p3": 0,
+    "average": 93.33333333333333
+   }
+  },
+  {
+   "position": 62,
+   "evolution": "N",
+   "track": "everything i wanted",
+   "artist": "Billie Eilish",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 46,
+    "p3": 88,
+    "average": 94.66666666666667
+   }
+  },
+  {
+   "position": 63,
+   "evolution": "N",
+   "track": "Take You Dancing",
+   "artist": "Jason Derulo",
+   "cover": "https://i.scdn.co/image/ab67616d0000485154eab2e4aa8b8706b6b526d2",
+   "positions": {
+    "p1": 55,
+    "p2": 0,
+    "p3": 81,
+    "average": 95.33333333333333
+   }
+  },
+  {
+   "position": 64,
+   "evolution": "N",
+   "track": "Louco",
+   "artist": "Piruka",
+   "cover": "https://i.scdn.co/image/ab67616d000048515df482cb29eb00486f60aec5",
+   "positions": {
+    "p1": 74,
+    "p2": 70,
+    "p3": 0,
+    "average": 98
+   }
+  },
+  {
+   "position": 65,
+   "evolution": "N",
+   "track": "Somos Iguais",
+   "artist": "Plutónio",
+   "cover": "https://i.scdn.co/image/ab67616d0000485186dcaf9c7c12dc6480b8e665",
+   "positions": {
+    "p1": 57,
+    "p2": 89,
+    "p3": 0,
+    "average": 98.66666666666667
+   }
+  },
+  {
+   "position": 66,
+   "evolution": "N",
+   "track": "Heather",
+   "artist": "Conan Gray",
+   "cover": "https://i.scdn.co/image/ab67616d0000485188e3cda6d29b2552d4d6bc43",
+   "positions": {
+    "p1": 71,
+    "p2": 0,
+    "p3": 77,
+    "average": 99.33333333333333
+   }
+  },
+  {
+   "position": 67,
+   "evolution": "N",
+   "track": "Do I Wanna Know?",
+   "artist": "Arctic Monkeys",
+   "cover": "https://i.scdn.co/image/ab67616d000048510acf7f2eefe5bd36efbc26b4",
+   "positions": {
+    "p1": 86,
+    "p2": 64,
+    "p3": 0,
+    "average": 100
+   }
+  },
+  {
+   "position": 68,
+   "evolution": "N",
+   "track": "Jealousy",
+   "artist": "Johnny B. Smart",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 1,
+    "average": 100.33333333333333
+   }
+  },
+  {
+   "position": 69,
+   "evolution": "N",
+   "track": "Paraíso",
+   "artist": "Kanoa Mixx",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 2,
+    "average": 100.66666666666667
+   }
+  },
+  {
+   "position": 70,
+   "evolution": "N",
+   "track": "Ready for Takeoff",
+   "artist": "J.C. Paris",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 3,
+    "average": 101
+   }
+  },
+  {
+   "position": 71,
+   "evolution": "N",
+   "track": "Secador de Cabelo Ruído Branco",
+   "artist": "Medicina Relaxante",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 6,
+    "average": 102
+   }
+  },
+  {
+   "position": 72,
+   "evolution": "N",
+   "track": "Devia Ir",
+   "artist": "Wet Bed Gang",
+   "cover": "https://i.scdn.co/image/ab67616d00004851da1952f36534b0aa5a15549e",
+   "positions": {
+    "p1": 95,
+    "p2": 62,
+    "p3": 0,
+    "average": 102.33333333333333
+   }
+  },
+  {
+   "position": 72,
+   "evolution": "N",
+   "track": "I Gotch U",
+   "artist": "Vado Más Ki Ás",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 7,
+    "average": 102.33333333333333
+   }
+  },
+  {
+   "position": 73,
+   "evolution": "N",
+   "track": "Highway",
+   "artist": "J.C. Paris",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 8,
+    "average": 102.66666666666667
+   }
+  },
+  {
+   "position": 74,
+   "evolution": "N",
+   "track": "You Were in My Dreams",
+   "artist": "Johnny B. Smart",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 9,
+    "average": 103
+   }
+  },
+  {
+   "position": 75,
+   "evolution": "N",
+   "track": "Wolves",
+   "artist": "Selena Gomez",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 15,
+    "average": 105
+   }
+  },
+  {
+   "position": 76,
+   "evolution": "N",
+   "track": "Oh Juliana",
+   "artist": "Niack",
+   "cover": "https://i.scdn.co/image/ab67616d00004851d5e84226231ade05cdc22661",
+   "positions": {
+    "p1": 92,
+    "p2": 76,
+    "p3": 0,
+    "average": 106
+   }
+  },
+  {
+   "position": 76,
+   "evolution": "N",
+   "track": "Todo o Dia",
+   "artist": "Chico da Tina",
+   "cover": "https://i.scdn.co/image/ab67616d000048510f81fcf6b46573cc4d98ef56",
+   "positions": {
+    "p1": 78,
+    "p2": 90,
+    "p3": 0,
+    "average": 106
+   }
+  },
+  {
+   "position": 77,
+   "evolution": "N",
+   "track": "Tusa",
+   "artist": "KAROL G",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 78,
+    "p3": 97,
+    "average": 108.33333333333333
+   }
+  },
+  {
+   "position": 78,
+   "evolution": "N",
+   "track": "Desce pro Play",
+   "artist": "Mc Zaac",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 91,
+    "p3": 87,
+    "average": 109.33333333333333
+   }
+  },
+  {
+   "position": 79,
+   "evolution": "N",
+   "track": "Drip da Roça",
+   "artist": "Reid",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 30,
+    "average": 110
+   }
+  },
+  {
+   "position": 80,
+   "evolution": "N",
+   "track": "No More Parties",
+   "artist": "Coi Leray",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 32,
+    "average": 110.66666666666667
+   }
+  },
+  {
+   "position": 81,
+   "evolution": "N",
+   "track": "Say So",
+   "artist": "Doja Cat",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 33,
+    "average": 111
+   }
+  },
+  {
+   "position": 82,
+   "evolution": "N",
+   "track": "HOLIDAY",
+   "artist": "Lil Nas X",
+   "cover": "https://i.scdn.co/image/ab67616d000048516771a05f34d77e5fc2bde64c",
+   "positions": {
+    "p1": 34,
+    "p2": 0,
+    "p3": 0,
+    "average": 111.33333333333333
+   }
+  },
+  {
+   "position": 83,
+   "evolution": "N",
+   "track": "Ronaldo",
+   "artist": "Chico da Tina",
+   "cover": "https://i.scdn.co/image/ab67616d00004851a112be47b6a7eb2edb89cf4a",
+   "positions": {
+    "p1": 35,
+    "p2": 0,
+    "p3": 0,
+    "average": 111.66666666666667
+   }
+  },
+  {
+   "position": 84,
+   "evolution": "N",
+   "track": "The Woo",
+   "artist": "Pop Smoke",
+   "cover": "https://i.scdn.co/image/ab67616d0000485177ada0863603903f57b34369",
+   "positions": {
+    "p1": 89,
+    "p2": 97,
+    "p3": 0,
+    "average": 112
+   }
+  },
+  {
+   "position": 84,
+   "evolution": "N",
+   "track": "Tempo",
+   "artist": "FRANKIEONTHEGUITAR",
+   "cover": "https://i.scdn.co/image/ab67616d000048517af0760b193e65f12c2f9d53",
+   "positions": {
+    "p1": 36,
+    "p2": 0,
+    "p3": 0,
+    "average": 112
+   }
+  },
+  {
+   "position": 85,
+   "evolution": "N",
+   "track": "cê vai perder essa mulher",
+   "artist": "Luan Santana",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 37,
+    "average": 112.33333333333333
+   }
+  },
+  {
+   "position": 86,
+   "evolution": "N",
+   "track": "Fever",
+   "artist": "Dua Lipa",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 39,
+    "average": 113
+   }
+  },
+  {
+   "position": 86,
+   "evolution": "N",
+   "track": "Tellin Me Something",
+   "artist": "",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 39,
+    "p3": 0,
+    "average": 113
+   }
+  },
+  {
+   "position": 87,
+   "evolution": "N",
+   "track": "Nada a Esconder",
+   "artist": "Slow J",
+   "cover": "https://i.scdn.co/image/ab67616d0000485190f8f1160dfb099e648543b6",
+   "positions": {
+    "p1": 41,
+    "p2": 0,
+    "p3": 0,
+    "average": 113.66666666666667
+   }
+  },
+  {
+   "position": 88,
+   "evolution": "N",
+   "track": "Essa Saia",
+   "artist": "Bispo",
+   "cover": "https://i.scdn.co/image/ab67616d00004851ca4e523c9f31fd2478887f74",
+   "positions": {
+    "p1": 98,
+    "p2": 94,
+    "p3": 0,
+    "average": 114
+   }
+  },
+  {
+   "position": 89,
+   "evolution": "N",
+   "track": "Dado",
+   "artist": "Rony Fuego",
+   "cover": "https://i.scdn.co/image/ab67616d00004851a1250c21b47115346bf3aa48",
+   "positions": {
+    "p1": 45,
+    "p2": 0,
+    "p3": 0,
+    "average": 115
+   }
+  },
+  {
+   "position": 90,
+   "evolution": "N",
+   "track": "Falling",
+   "artist": "Trevor Daniel",
+   "cover": "https://i.scdn.co/image/ab67616d00004851626fb1736f04466054ff7dd4",
+   "positions": {
+    "p1": 97,
+    "p2": 0,
+    "p3": 99,
+    "average": 115.33333333333333
+   }
+  },
+  {
+   "position": 91,
+   "evolution": "N",
+   "track": "MAMACITA",
+   "artist": "Black Eyed Peas",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 49,
+    "average": 116.33333333333333
+   }
+  },
+  {
+   "position": 92,
+   "evolution": "N",
+   "track": "goosebumps",
+   "artist": "Travis Scott",
+   "cover": "https://i.scdn.co/image/ab67616d00004851f54b99bf27cda88f4a7403ce",
+   "positions": {
+    "p1": 50,
+    "p2": 0,
+    "p3": 0,
+    "average": 116.66666666666667
+   }
+  },
+  {
+   "position": 93,
+   "evolution": "N",
+   "track": "Piece of My Heart",
+   "artist": "Janis Joplin",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 51,
+    "average": 117
+   }
+  },
+  {
+   "position": 94,
+   "evolution": "N",
+   "track": "Rock You Like a Hurricane",
+   "artist": "Scorpions",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 52,
+    "average": 117.33333333333333
+   }
+  },
+  {
+   "position": 95,
+   "evolution": "N",
+   "track": "Blueberry Faygo",
+   "artist": "Lil Mosey",
+   "cover": "https://i.scdn.co/image/ab67616d000048510824105a6282782aaabb0584",
+   "positions": {
+    "p1": 53,
+    "p2": 0,
+    "p3": 0,
+    "average": 117.66666666666667
+   }
+  },
+  {
+   "position": 96,
+   "evolution": "N",
+   "track": "Dios Mio",
+   "artist": "Bizzy Crook",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 54,
+    "average": 118
+   }
+  },
+  {
+   "position": 97,
+   "evolution": "N",
+   "track": "Relaxing Music For Studying",
+   "artist": "Studying Music",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 56,
+    "average": 118.66666666666667
+   }
+  },
+  {
+   "position": 97,
+   "evolution": "N",
+   "track": "Agua de Jamaica",
+   "artist": "Maluma",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 56,
+    "p3": 0,
+    "average": 118.66666666666667
+   }
+  },
+  {
+   "position": 98,
+   "evolution": "N",
+   "track": "Sway With Me",
+   "artist": "Saweetie",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 57,
+    "average": 119
+   }
+  },
+  {
+   "position": 99,
+   "evolution": "N",
+   "track": "HIGHEST IN THE ROOM",
+   "artist": "Travis Scott",
+   "cover": "https://i.scdn.co/image/ab67616d00004851e42b5fea4ac4c3d6328b622b",
+   "positions": {
+    "p1": 58,
+    "p2": 0,
+    "p3": 0,
+    "average": 119.33333333333333
+   }
+  },
+  {
+   "position": 99,
+   "evolution": "N",
+   "track": "Flores",
+   "artist": "Vitão",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 0,
+    "p3": 58,
+    "average": 119.33333333333333
+   }
+  },
+  {
+   "position": 100,
+   "evolution": "N",
+   "track": "Golden",
+   "artist": "Harry Styles",
+   "cover": "",
+   "positions": {
+    "p1": 0,
+    "p2": 59,
+    "p3": 0,
+    "average": 119.66666666666667
+   }
+  }
+ ]
+}

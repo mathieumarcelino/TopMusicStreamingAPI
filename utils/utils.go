@@ -36,6 +36,24 @@ func TrimStringCoverDeezer(s string) string {
 	return s
 }
 
+func TrimStringArtistDeezer(s string) string {
+	if idx := strings.Index(s, " - "); idx != -1 {
+		return s[:idx]
+	}
+	return s
+}
+
+func TrimStringTrackDeezer(s string) string {
+	idx1 := strings.Index(s, " - ")
+	idx2 := strings.Index(s, " (")
+	if idx1 != -1 && idx2 != -1 {
+		return s[(idx1 + 3):idx2]
+	} else if idx1 != -1 {
+		return s[(idx1 + 3):]
+	}
+	return s
+}
+
 func StringInSlice(a string, list []string) bool {
 	for _, b := range list {
 		if b == a {
