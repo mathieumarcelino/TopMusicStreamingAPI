@@ -61,8 +61,7 @@ type Names struct {
 
 func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, array3 [][]string, name3 string, country string) {
 
-	// jsonFile, err := os.Open("json/" + country + ".json")
-	jsonFile, err := os.Open("root/go/go-web/json/" + country + ".json")
+	jsonFile, err := os.Open("json/" + country + ".json")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -313,8 +312,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		Tracks: finalsTracks,
 	}
 
-	// WriteJSON(finalJson, "json/"+country+".json")
-	WriteJSON(finalJson, "root/go/go-web/json/"+country+".json")
+	WriteJSON(finalJson, "json/"+country+".json")
 }
 
 func WriteJSON(data Final, file string) {

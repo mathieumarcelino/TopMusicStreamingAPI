@@ -11,15 +11,14 @@ import (
 )
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir("root/go/go-web/public")))
-	http.Handle("/ww/", http.StripPrefix("/ww/", http.FileServer(http.Dir("root/go/go-web/public"))))
-	http.Handle("/us/", http.StripPrefix("/us/", http.FileServer(http.Dir("root/go/go-web/public"))))
-	http.Handle("/fr/", http.StripPrefix("/fr/", http.FileServer(http.Dir("root/go/go-web/public"))))
-	http.Handle("/de/", http.StripPrefix("/de/", http.FileServer(http.Dir("root/go/go-web/public"))))
-	http.Handle("/es/", http.StripPrefix("/es/", http.FileServer(http.Dir("root/go/go-web/public"))))
-	http.Handle("/pt/", http.StripPrefix("/pt/", http.FileServer(http.Dir("root/go/go-web/public"))))
-	http.Handle("/it/", http.StripPrefix("/it/", http.FileServer(http.Dir("root/go/go-web/public"))))
-	// http.Handle("/", http.FileServer(http.Dir("/public")))
+	http.Handle("/", http.FileServer(http.Dir("/public")))
+	http.Handle("/ww/", http.StripPrefix("/ww/", http.FileServer(http.Dir("/public"))))
+	http.Handle("/us/", http.StripPrefix("/us/", http.FileServer(http.Dir("/public"))))
+	http.Handle("/fr/", http.StripPrefix("/fr/", http.FileServer(http.Dir("/public"))))
+	http.Handle("/de/", http.StripPrefix("/de/", http.FileServer(http.Dir("/public"))))
+	http.Handle("/es/", http.StripPrefix("/es/", http.FileServer(http.Dir("/public"))))
+	http.Handle("/pt/", http.StripPrefix("/pt/", http.FileServer(http.Dir("/public"))))
+	http.Handle("/it/", http.StripPrefix("/it/", http.FileServer(http.Dir("/public"))))
 
 	cWW := cron.New()
 	cWW.AddFunc("CRON_TZ=Europe/Paris 30 14 * * *", func() { hub.Hub_WW() })
