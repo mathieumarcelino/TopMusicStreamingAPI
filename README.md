@@ -5,7 +5,7 @@ Hi ! This program in Golang generates the **top 100** most listened to music on 
 ## Link
 [topmusicstreaming.com](https://topmusicstreaming.com/)
 
-## Exemple :
+## Exemple
 
 ### Data :
 
