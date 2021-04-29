@@ -6,7 +6,10 @@ require (
 	github.com/PuerkitoBio/goquery v1.6.1 // indirect
 	github.com/antchfx/htmlquery v1.2.3 // indirect
 	github.com/antchfx/xmlquery v1.3.3 // indirect
+	github.com/cenkalti/backoff v2.2.1+incompatible // indirect
 	github.com/deckarep/golang-set v1.7.1 // indirect
+	github.com/dghubble/go-twitter v0.0.0-20201011215211-4b180d0cc78d
+	github.com/dghubble/oauth1 v0.7.0
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gocolly/colly v1.2.0
 	github.com/kennygrant/sanitize v1.2.4 // indirect

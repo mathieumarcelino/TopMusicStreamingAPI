@@ -6,29 +6,32 @@ import (
 	"github.com/gocolly/colly"
 )
 
-func Spotify() [][]string {
-	allInfosSpotify := [][]string{}
+func YouTube() [][]string {
+	allInfosYouTube := [][]string{}
 	i := 0
 
-	collectorSpotify := colly.NewCollector(
-		colly.AllowedDomains("spotifycharts.com"),
+	collectorYouTube := colly.NewCollector(
+		colly.AllowedDomains("kworb.net"),
 	)
 
-	collectorSpotify.OnHTML(".chart-table tbody tr", func(element *colly.HTMLElement) {
-		if i < 100 {
-			infoTRACKSpotify := utils.TrimStringTrack(element.ChildText(".chart-table-track strong"))
-			infoARTISTSpotify := utils.TrimStringArtist(element.ChildText(".chart-table-track span"))[3:]
-			infoCOVERSpotify := element.ChildAttr(".chart-table-image a img", "src")
+	collectorYouTube.OnHTML("#weeklytable", func(element *colly.HTMLElement) {
+		element.ForEach("tbody tr", func(_ int, el *colly.HTMLElement) {
+			if i < 100 {
+				infoTRACKYouTube := utils.TrimStringTrack(el.ChildText(".mp div"))
+				infoARTISTYouTube := utils.TrimStringArtist(el.ChildText(".mp div"))
+				infoCOVERYouTube := ""
 
-			infoSpotify := []string{infoTRACKSpotify, infoARTISTSpotify, infoCOVERSpotify}
+				infoYouTube := []string{infoTRACKYouTube, infoARTISTYouTube, infoCOVERYouTube}
 
-			allInfosSpotify = append(allInfosSpotify, infoSpotify)
-		}
-		i++
+				allInfosYouTube = append(allInfosYouTube, infoYouTube)
+			}
+			i++
+		})
+
 	})
+	collectorYouTube.Visit("https://kworb.net/youtube/insights/es.html")
 
-	collectorSpotify.Visit("https://spotifycharts.com/regional/es/daily/latest")
-	return allInfosSpotify
+	return allInfosYouTube
 }
 
 func AppleMusic() [][]string {
@@ -36,30 +39,26 @@ func AppleMusic() [][]string {
 	i := 0
 
 	collectorAppleMusic := colly.NewCollector(
-		colly.AllowedDomains("music.apple.com"),
+		colly.AllowedDomains("kworb.net"),
 	)
 
-	collectorAppleMusic.OnHTML(".songs-list .track .col-song .col-song__wrapper", func(element *colly.HTMLElement) {
-		if i < 100 {
-			infoTRACKAppleMusic := utils.TrimStringTrack(element.ChildText(".song-wrapper .song-name-wrapper .song-name"))
-			infoARTISTAppleMusic := ""
-			infoCOVERAppleMusic := ""
-			element.ForEach(".song-wrapper .song-name-wrapper .by-line span", func(_ int, el *colly.HTMLElement) {
-				infoARTISTAppleMusic = el.ChildText("a:nth-child(1)")
-			})
+	collectorAppleMusic.OnHTML(".sortable", func(element *colly.HTMLElement) {
+		element.ForEach("tbody tr", func(_ int, el *colly.HTMLElement) {
+			if i < 100 {
+				infoTRACKAppleMusic := utils.TrimStringTrack(el.ChildText(".mp div"))
+				infoARTISTAppleMusic := utils.TrimStringArtist(el.ChildText(".mp div"))
+				infoCOVERAppleMusic := ""
 
-			element.ForEach(".col-song__index-wrapper .song-index .media-artwork-v2 picture", func(_ int, el *colly.HTMLElement) {
-				infoCOVERAppleMusic = utils.TrimStringCoverAppleMusic(el.ChildAttr("source:nth-child(1)", "srcset"))
-			})
+				infoAppleMusic := []string{infoTRACKAppleMusic, infoARTISTAppleMusic, infoCOVERAppleMusic}
 
-			infoAppleMusic := []string{infoTRACKAppleMusic, infoARTISTAppleMusic, infoCOVERAppleMusic}
+				allInfosAppleMusic = append(allInfosAppleMusic, infoAppleMusic)
+			}
+			i++
+		})
 
-			allInfosAppleMusic = append(allInfosAppleMusic, infoAppleMusic)
-		}
-		i++
 	})
+	collectorAppleMusic.Visit("https://kworb.net/charts/apple_s/es.html")
 
-	collectorAppleMusic.Visit("https://music.apple.com/fr/playlist/le-top-100-espagne/pl.0d656d7feae64198bc5fb1b02786ed75")
 	return allInfosAppleMusic
 }
 
@@ -74,8 +73,8 @@ func Deezer() [][]string {
 	collectorDeezer.OnHTML(".sortable", func(element *colly.HTMLElement) {
 		element.ForEach("tbody tr", func(_ int, el *colly.HTMLElement) {
 			if i < 100 {
-				infoTRACKDeezer := utils.TrimStringTrackDeezer(el.ChildText(".mp div"))
-				infoARTISTDeezer := utils.TrimStringArtistDeezer(el.ChildText(".mp div"))
+				infoTRACKDeezer := utils.TrimStringTrack(el.ChildText(".mp div"))
+				infoARTISTDeezer := utils.TrimStringArtist(el.ChildText(".mp div"))
 				infoCOVERDeezer := ""
 
 				infoDeezer := []string{infoTRACKDeezer, infoARTISTDeezer, infoCOVERDeezer}

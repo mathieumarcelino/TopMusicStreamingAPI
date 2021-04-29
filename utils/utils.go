@@ -4,46 +4,14 @@ import (
 	"strings"
 )
 
-func TrimStringTrack(s string) string {
-	if idx := strings.Index(s, " ("); idx != -1 {
-		return s[:idx]
-	}
-	return s
-}
-
 func TrimStringArtist(s string) string {
-	if idx := strings.Index(s, ","); idx != -1 {
-		return s[:idx]
-	}
-	return s
-}
-
-func TrimStringCoverAppleMusic(s string) string {
-	idx1 := strings.Index(s, "40w, ")
-	idx2 := strings.Index(s, " 80w")
-	if idx1 != -1 && idx2 != -1 {
-		return s[(idx1 + 5):idx2]
-	}
-	return s
-}
-
-func TrimStringCoverDeezer(s string) string {
-	idx1 := strings.Index(s, "(")
-	idx2 := strings.Index(s, ")")
-	if idx1 != -1 && idx2 != -1 {
-		return s[(idx1 + 1):idx2]
-	}
-	return s
-}
-
-func TrimStringArtistDeezer(s string) string {
 	if idx := strings.Index(s, " - "); idx != -1 {
 		return s[:idx]
 	}
 	return s
 }
 
-func TrimStringTrackDeezer(s string) string {
+func TrimStringTrack(s string) string {
 	idx1 := strings.Index(s, " - ")
 	idx2 := strings.Index(s, " (")
 	if idx1 != -1 && idx2 != -1 {
@@ -61,4 +29,15 @@ func StringInSlice(a string, list []string) bool {
 		}
 	}
 	return false
+}
+
+func TrimTweet(s string) string {
+	val := s
+	if idx1 := strings.Index(val, "&"); idx1 != -1 {
+		val = strings.ReplaceAll(val, "&", "")
+	}
+	if idx2 := strings.Index(val, " "); idx2 != -1 {
+		val = strings.ReplaceAll(val, " ", "")
+	}
+	return val
 }

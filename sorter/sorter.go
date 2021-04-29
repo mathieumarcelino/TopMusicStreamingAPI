@@ -9,7 +9,9 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"topmusicstreaming/bot"
 	"topmusicstreaming/utils"
+	"unicode/utf8"
 
 	"github.com/masatana/go-textdistance"
 )
@@ -24,7 +26,6 @@ type Track struct {
 	Evolution string    `json:"evolution"`
 	Track     string    `json:"track"`
 	Artist    string    `json:"artist"`
-	Cover     string    `json:"cover"`
 	Positions Positions `json:"positions"`
 }
 
@@ -33,7 +34,6 @@ type TrackBeforeSort struct {
 	Evolution         string  `json:"evolution"`
 	Track             string  `json:"track"`
 	Artist            string  `json:"artist"`
-	Cover             string  `json:"cover"`
 	Platform1Position int     `json:"p1"`
 	Platform2Position int     `json:"p2"`
 	Platform3Position int     `json:"p3"`
@@ -60,7 +60,9 @@ type Names struct {
 }
 
 func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, array3 [][]string, name3 string, country string) {
-
+	fmt.Println(array1)
+	fmt.Println(array2)
+	fmt.Println(array3)
 	jsonFile, err := os.Open("json/" + country + ".json")
 	if err != nil {
 		fmt.Println(err)
@@ -127,13 +129,11 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 
 		finalTrackName := array1[i][0]
 		finalArtistName := array1[i][1]
-		finalCoverUrl := array1[i][2]
 
 		finalTrackBeforeSort := TrackBeforeSort{
 			Position:          finalPositionGlobal,
 			Track:             finalTrackName,
 			Artist:            finalArtistName,
-			Cover:             finalCoverUrl,
 			Platform1Position: int(platform1Position),
 			Platform2Position: int(platform2Position),
 			Platform3Position: int(platform3Position),
@@ -182,13 +182,11 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 
 			finalTrackName := array2[i][0]
 			finalArtistName := array2[i][1]
-			finalCoverUrl := array2[i][2]
 
 			finalTrackBeforeSort := TrackBeforeSort{
 				Position:          finalPositionGlobal,
 				Track:             finalTrackName,
 				Artist:            finalArtistName,
-				Cover:             finalCoverUrl,
 				Platform1Position: int(platform1Position),
 				Platform2Position: int(platform2Position),
 				Platform3Position: int(platform3Position),
@@ -240,13 +238,11 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 
 			finalTrackName := array3[i][0]
 			finalArtistName := array3[i][1]
-			finalCoverUrl := array3[i][2]
 
 			finalTrackBeforeSort := TrackBeforeSort{
 				Position:          finalPositionGlobal,
 				Track:             finalTrackName,
 				Artist:            finalArtistName,
-				Cover:             finalCoverUrl,
 				Platform1Position: int(platform1Position),
 				Platform2Position: int(platform2Position),
 				Platform3Position: int(platform3Position),
@@ -281,7 +277,6 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 				Evolution: CheckEvolution(final, finalsTracksBeforeSort[i].Track, position),
 				Track:     finalsTracksBeforeSort[i].Track,
 				Artist:    finalsTracksBeforeSort[i].Artist,
-				Cover:     finalsTracksBeforeSort[i].Cover,
 				Positions: finalPosition,
 			}
 			finalsTracks = append(finalsTracks, finalTrack)
@@ -298,7 +293,6 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 				Evolution: CheckEvolution(final, finalsTracksBeforeSort[i].Track, position),
 				Track:     finalsTracksBeforeSort[i].Track,
 				Artist:    finalsTracksBeforeSort[i].Artist,
-				Cover:     finalsTracksBeforeSort[i].Cover,
 				Positions: finalPosition,
 			}
 			finalsTracks = append(finalsTracks, finalTrack)
@@ -306,6 +300,19 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			break
 		}
 	}
+
+	tweet := bot.TweetHeader(country)
+	tweet += "\n\n"
+	tweet += bot.TweetPosition(finalsTracks[0].Position) + bot.TweetEvolution(finalsTracks[0].Evolution) + " " + finalsTracks[0].Artist + " - " + finalsTracks[0].Track + "\n"
+	tweet += bot.TweetPosition(finalsTracks[1].Position) + bot.TweetEvolution(finalsTracks[1].Evolution) + " " + finalsTracks[1].Artist + " - " + finalsTracks[1].Track + "\n"
+	tweet += bot.TweetPosition(finalsTracks[2].Position) + bot.TweetEvolution(finalsTracks[2].Evolution) + " " + finalsTracks[2].Artist + " - " + finalsTracks[2].Track + "\n"
+	tweet += bot.TweetPosition(finalsTracks[3].Position) + bot.TweetEvolution(finalsTracks[3].Evolution) + " " + finalsTracks[3].Artist + " - " + finalsTracks[3].Track + "\n"
+	tweet += bot.TweetPosition(finalsTracks[4].Position) + bot.TweetEvolution(finalsTracks[4].Evolution) + " " + finalsTracks[4].Artist + " - " + finalsTracks[4].Track + "\n"
+	tweet += "\n"
+	tweet += "topmusicstreaming.com/" + country
+	tweet += "\n\n"
+	tweet += bot.TweetHashtag(finalsTracks[0].Artist, finalsTracks[1].Artist, finalsTracks[2].Artist, finalsTracks[3].Artist, finalsTracks[4].Artist, utf8.RuneCountInString(tweet))
+	bot.Tweet(tweet)
 
 	finalJson := Final{
 		Header: finalHeader,
