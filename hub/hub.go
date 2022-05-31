@@ -11,49 +11,49 @@ import (
 )
 
 func Hub_FR() {
-	allInfosYouTube := collectorfr.YouTube()
+	allInfosSpotify := collectorfr.Spotify()
 	allInfosAppleMusic := collectorfr.AppleMusic()
 	allInfosDeezer := collectorfr.Deezer()
 
-	sorter.Sorter(allInfosYouTube, "youtube", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "fr")
+	sorter.Sorter(allInfosSpotify, "spotify", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "fr")
 }
 
 func Hub_US() {
-	allInfosYouTube := collectorus.YouTube()
+	allInfosSpotify := collectorus.Spotify()
 	allInfosAppleMusic := collectorus.AppleMusic()
 	allInfosDeezer := collectorus.Deezer()
 
-	sorter.Sorter(allInfosYouTube, "youtube", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "us")
+	sorter.Sorter(allInfosSpotify, "spotify", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "us")
 }
 
 func Hub_DE() {
-	allInfosYouTube := collectorde.YouTube()
+	allInfosSpotify := collectorde.Spotify()
 	allInfosAppleMusic := collectorde.AppleMusic()
 	allInfosDeezer := collectorde.Deezer()
 
-	sorter.Sorter(allInfosYouTube, "youtube", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "de")
+	sorter.Sorter(allInfosSpotify, "spotify", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "de")
 }
 
 func Hub_ES() {
-	allInfosYouTube := collectores.YouTube()
+	allInfosSpotify := collectores.Spotify()
 	allInfosAppleMusic := collectores.AppleMusic()
 	allInfosDeezer := collectores.Deezer()
 
-	sorter.Sorter(allInfosYouTube, "youtube", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "es")
+	sorter.Sorter(allInfosSpotify, "spotify", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "es")
 }
 
 func Hub_PT() {
-	allInfosYouTube := collectorpt.YouTube()
+	allInfosSpotify := collectorpt.Spotify()
 	allInfosAppleMusic := collectorpt.AppleMusic()
 	allInfosDeezer := collectorpt.Deezer()
 
-	sorter.Sorter(allInfosYouTube, "youtube", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "pt")
+	sorter.Sorter(allInfosSpotify, "spotify", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "pt")
 }
 
 func Hub_IT() {
-	allInfosYouTube := collectorit.YouTube()
+	allInfosSpotify := collectorit.Spotify()
 	allInfosAppleMusic := collectorit.AppleMusic()
 	allInfosDeezer := collectorit.Deezer()
 
-	sorter.Sorter(allInfosYouTube, "youtube", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "it")
+	sorter.Sorter(allInfosSpotify, "spotify", allInfosAppleMusic, "applemusic", allInfosDeezer, "deezer", "it")
 }

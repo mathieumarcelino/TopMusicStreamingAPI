@@ -6,32 +6,32 @@ import (
 	"github.com/gocolly/colly"
 )
 
-func YouTube() [][]string {
-	allInfosYouTube := [][]string{}
+func Spotify() [][]string {
+	allInfosSpotify := [][]string{}
 	i := 0
 
-	collectorYouTube := colly.NewCollector(
+	collectorSpotify := colly.NewCollector(
 		colly.AllowedDomains("kworb.net"),
 	)
 
-	collectorYouTube.OnHTML("#weeklytable", func(element *colly.HTMLElement) {
+	collectorSpotify.OnHTML("#spotifydaily", func(element *colly.HTMLElement) {
 		element.ForEach("tbody tr", func(_ int, el *colly.HTMLElement) {
 			if i < 100 {
-				infoTRACKYouTube := utils.TrimStringTrack(el.ChildText(".mp div"))
-				infoARTISTYouTube := utils.TrimStringArtist(el.ChildText(".mp div"))
-				infoCOVERYouTube := ""
+				infoTRACKSpotify := utils.TrimStringTrack(el.ChildText(".mp div"))
+				infoARTISTSpotify := utils.TrimStringArtist(el.ChildText(".mp div"))
+				infoCOVERSpotify := ""
 
-				infoYouTube := []string{infoTRACKYouTube, infoARTISTYouTube, infoCOVERYouTube}
+				infoSpotify := []string{infoTRACKSpotify, infoARTISTSpotify, infoCOVERSpotify}
 
-				allInfosYouTube = append(allInfosYouTube, infoYouTube)
+				allInfosSpotify = append(allInfosSpotify, infoSpotify)
 			}
 			i++
 		})
 
 	})
-	collectorYouTube.Visit("https://kworb.net/youtube/insights/es.html")
+	collectorSpotify.Visit("https://kworb.net/spotify/country/es_daily.html")
 
-	return allInfosYouTube
+	return allInfosSpotify
 }
 
 func AppleMusic() [][]string {
