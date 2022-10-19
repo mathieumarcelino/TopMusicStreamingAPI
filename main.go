@@ -1,42 +1,51 @@
 package main
 
-//"topmusicstreaming/collector"
-
 import (
+	"fmt"
+	"github.com/robfig/cron/v3"
 	"net/http"
 	"topmusicstreaming/api"
 	"topmusicstreaming/hub"
+	"topmusicstreaming/utils"
 
-	"github.com/robfig/cron/v3"
 )
 
 func main() {
 
+	config := utils.LoadConfig()
+
 	cUS := cron.New()
-	cUS.AddFunc("CRON_TZ=Europe/Paris 30 15 * * *", func() { hub.Hub_US() })
+	cUS.AddFunc(setCron(config.Env, 15), func() { hub.Hub_US() })
 	cUS.Start()
 
 	cFR := cron.New()
-	cFR.AddFunc("CRON_TZ=Europe/Paris 30 16 * * *", func() { hub.Hub_FR() })
+	cFR.AddFunc(setCron(config.Env, 16), func() { hub.Hub_FR() })
 	cFR.Start()
 
 	cDE := cron.New()
-	cDE.AddFunc("CRON_TZ=Europe/Paris 30 17 * * *", func() { hub.Hub_DE() })
+	cDE.AddFunc(setCron(config.Env, 17), func() { hub.Hub_DE() })
 	cDE.Start()
 
 	cES := cron.New()
-	cES.AddFunc("CRON_TZ=Europe/Paris 30 18 * * *", func() { hub.Hub_ES() })
+	cES.AddFunc(setCron(config.Env, 18), func() { hub.Hub_ES() })
 	cES.Start()
 
 	cPT := cron.New()
-	cPT.AddFunc("CRON_TZ=Europe/Paris 30 19 * * *", func() { hub.Hub_PT() })
+	cPT.AddFunc(setCron(config.Env, 19), func() { hub.Hub_PT() })
 	cPT.Start()
 
 	cIT := cron.New()
-	cIT.AddFunc("CRON_TZ=Europe/Paris 30 20 * * *", func() { hub.Hub_IT() })
+	cIT.AddFunc(setCron(config.Env, 20), func() { hub.Hub_IT() })
 	cIT.Start()
 
 	http.HandleFunc("/api", api.Api)
-	http.ListenAndServe(":9990", nil)
+	http.ListenAndServe(fmt.Sprintf(":%d", config.Port), nil)
+}
 
+func setCron(env string, hour int) string {
+	if env != "prod" {
+		return ""
+	}
+
+	return fmt.Sprintf("CRON_TZ=Europe/Paris 30 %d * * *", hour)
 }
