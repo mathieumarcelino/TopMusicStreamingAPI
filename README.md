@@ -25,15 +25,42 @@ Hi ! This program in Golang generates the **top 100** most listened to music on 
 4. Track 5
 5. Track 4
 
+
 ## Usage
 
 ```
 git clone https://github.com/mathieumarcelino/topmusicstreaming
 ```
 
-```
-go run main.go
+Local development
+
+Create a directory `local` with a `env.sh`
+
+```shell
+#!/bin/sh
+export env= "local"
 ```
 
-Visit [localhost:9990](http://localhost:9990)
+```
+source local/env.sh
+```
 
+Run program
+```
+make run
+```
+
+Example Request
+
+```
+http://localhost:9990/api?country=fr
+```
+
+#### Country Options
+
+- fr (France 🇫🇷)
+- de (Deutsch 🇩🇪)
+- usa (United States 🇺🇸)
+- pt (Portugal 🇵🇹)
+- es (Spain 🇪🇸)
+- it (Italy 🇮🇹)

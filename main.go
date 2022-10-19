@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/robfig/cron/v3"
+	 cron "github.com/robfig/cron/v3"
 	"net/http"
 	"topmusicstreaming/api"
 	"topmusicstreaming/hub"
@@ -13,7 +13,7 @@ func main() {
 
 	config := utils.LoadConfig()
 
-	utils.Logger.Infof("Running %s on %s \n", config.AppName, config.Env)
+	utils.Logger.Infof("Running %s on %s", config.AppName, config.Env)
 
 	cUS := cron.New()
 	cUS.AddFunc(setCron(config.Env, 15), func() { hub.Hub_US() })
