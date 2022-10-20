@@ -14,9 +14,9 @@ func LoadConfig() Config {
 
 	conf.AppName = "TopMusicStreaming API"
 	conf.Port = 9990
-	conf.Env = "prod"
+	conf.Env = PROD
 
-	if os.Getenv("env") != "" {
+	if os.Getenv("env") != EMPTY {
 		conf.Env = os.Getenv("env")
 	}
 

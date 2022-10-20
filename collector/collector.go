@@ -1,17 +1,16 @@
-package collectorus
+package collector
 
 import (
-	"topmusicstreaming/utils"
-
 	"github.com/gocolly/colly"
+	"topmusicstreaming/utils"
 )
 
-func Spotify() [][]string {
-	allInfosSpotify := [][]string{}
+func Spotify(country string) [][]string {
+	var allInfosSpotify [][]string
 	i := 0
 
 	collectorSpotify := colly.NewCollector(
-		colly.AllowedDomains("kworb.net"),
+		colly.AllowedDomains(utils.CollectorDomain),
 	)
 
 	collectorSpotify.OnHTML("#spotifydaily", func(element *colly.HTMLElement) {
@@ -29,17 +28,17 @@ func Spotify() [][]string {
 		})
 
 	})
-	collectorSpotify.Visit("https://kworb.net/spotify/country/us_daily.html")
+	collectorSpotify.Visit(utils.BuildCollectorUrl(utils.Spotify, country))
 
 	return allInfosSpotify
 }
 
-func AppleMusic() [][]string {
-	allInfosAppleMusic := [][]string{}
+func AppleMusic(country string) [][]string {
+	var allInfosAppleMusic [][]string
 	i := 0
 
 	collectorAppleMusic := colly.NewCollector(
-		colly.AllowedDomains("kworb.net"),
+		colly.AllowedDomains(utils.CollectorDomain),
 	)
 
 	collectorAppleMusic.OnHTML(".sortable", func(element *colly.HTMLElement) {
@@ -57,17 +56,17 @@ func AppleMusic() [][]string {
 		})
 
 	})
-	collectorAppleMusic.Visit("https://kworb.net/charts/apple_s/us.html")
+	collectorAppleMusic.Visit(utils.BuildCollectorUrl(utils.AppleMusic, country))
 
 	return allInfosAppleMusic
 }
 
-func Deezer() [][]string {
-	allInfosDeezer := [][]string{}
+func Deezer(country string) [][]string {
+	var allInfosDeezer [][]string
 	i := 0
 
 	collectorDeezer := colly.NewCollector(
-		colly.AllowedDomains("kworb.net"),
+		colly.AllowedDomains(utils.CollectorDomain),
 	)
 
 	collectorDeezer.OnHTML(".sortable", func(element *colly.HTMLElement) {
@@ -85,7 +84,7 @@ func Deezer() [][]string {
 		})
 
 	})
-	collectorDeezer.Visit("https://kworb.net/charts/deezer/us.html")
+	collectorDeezer.Visit(utils.BuildCollectorUrl(utils.Deezer, country))
 
 	return allInfosDeezer
 }
