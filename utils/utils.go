@@ -1,7 +1,12 @@
 package utils
 
 import (
+	"encoding/json"
+	"errors"
+	"os"
+	"path/filepath"
 	"strings"
+	"topmusicstreaming/models"
 )
 
 func TrimStringArtist(s string) string {
@@ -41,3 +46,58 @@ func TrimTweet(s string) string {
 	}
 	return val
 }
+
+func ensurePath(dir, file string) (string, error) {
+	cwd, _ := os.Getwd()
+	if _, err := os.Stat(dir); errors.Is(err, os.ErrNotExist) {
+		err := os.Mkdir(dir, os.ModePerm)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	path := filepath.Join(cwd, dir, file)
+	newFilePath := filepath.FromSlash(path)
+	_, err := os.Create(newFilePath)
+	if err != nil {
+		return "", err
+	}
+
+	Logger.Infof("File created successfully at %s\n", newFilePath)
+
+	return newFilePath, nil
+}
+
+func BuildFilePath(dir, name, ext string) (string, error) {
+	file := name + "." + ext
+	path, err := ensurePath(dir, file)
+	if err != nil {
+		return "", err
+	}
+	return path, nil
+}
+
+func WriteJSON(data models.Final, file string) error {
+	dataFile, err := json.MarshalIndent(data, "", " ")
+	if err != nil {
+		return err
+	}
+	if err = os.WriteFile(file, dataFile, 0666); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func BuildCollectorUrl(platform, country string) string {
+	switch platform {
+	case Spotify:
+		return SpotifyBaseCollectorUri + country + "_daily" + HTMLEXT
+	case AppleMusic:
+		return AppleMusicCollectorBaseUri + country + HTMLEXT
+	case Deezer:
+		return DeezerCollectorBaseUri + country + HTMLEXT
+	}
+	return PlatformNotSupported
+}
+

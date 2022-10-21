@@ -50,7 +50,11 @@ Run program
 make run
 ```
 
-Example Request
+If env is local you can see output in a ``json`` directory
+
+Otherwise you'll have to make an API request ⬇️
+
+###  Example API Request
 
 ```
 http://localhost:9990/api?country=fr
@@ -60,7 +64,7 @@ http://localhost:9990/api?country=fr
 
 - fr (France 🇫🇷)
 - de (Deutsch 🇩🇪)
-- usa (United States 🇺🇸)
+- us (United States 🇺🇸)
 - pt (Portugal 🇵🇹)
 - es (Spain 🇪🇸)
 - it (Italy 🇮🇹)
