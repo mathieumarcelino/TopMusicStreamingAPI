@@ -6,20 +6,19 @@ import (
 	"topmusicstreaming/utils"
 )
 
-func Hub(country string) {
+func Launch(country string) {
 	allInfosSpotify := collector.Spotify(country)
 	allInfosAppleMusic := collector.AppleMusic(country)
 	allInfosDeezer := collector.Deezer(country)
 
-	sorter.Sorter(allInfosSpotify, utils.Spotify, allInfosAppleMusic, utils.AppleMusic, allInfosDeezer, utils.Deezer, country)
+	sorter.Sort(allInfosSpotify, utils.Spotify, allInfosAppleMusic, utils.AppleMusic, allInfosDeezer, utils.Deezer, country)
 }
 
-
 func LaunchAll() {
-	Hub(utils.US)
-	Hub(utils.FR)
-	Hub(utils.DE)
-	Hub(utils.ES)
-	Hub(utils.PT)
-	Hub(utils.IT)
+	Launch(utils.US)
+	Launch(utils.FR)
+	Launch(utils.DE)
+	Launch(utils.ES)
+	Launch(utils.PT)
+	Launch(utils.IT)
 }
