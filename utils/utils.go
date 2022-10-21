@@ -63,7 +63,7 @@ func ensurePath(dir, file string) (string, error) {
 		return "", err
 	}
 
-	Logger.Infof("File created successfully at %s\n", newFilePath)
+	Logger.Infof("%s created successfully at %s \n", file, newFilePath)
 
 	return newFilePath, nil
 }
@@ -100,4 +100,3 @@ func BuildCollectorUrl(platform, country string) string {
 	}
 	return PlatformNotSupported
 }
-

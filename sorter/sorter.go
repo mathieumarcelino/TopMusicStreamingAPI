@@ -9,13 +9,12 @@ import (
 	"topmusicstreaming/bot"
 	"topmusicstreaming/models"
 	"topmusicstreaming/utils"
-	"unicode/utf8"
+	"unicode/utf8" //nolint
 
-	"github.com/masatana/go-textdistance"
+	distancetext "github.com/masatana/go-textdistance"
 )
 
-
-func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, array3 [][]string, name3 string, country string) {
+func Sort(array1 [][]string, name1 string, array2 [][]string, name2 string, array3 [][]string, name3 string, country string) {
 
 	path, err := utils.BuildFilePath("json", country, "json")
 	if err != nil {
@@ -43,7 +42,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 	}
 
 	finalsTracksBeforeSort := make([]models.TrackBeforeSort, 0)
-	var alreadyCkeck []string
+	var alreadyCheck []string
 
 	for i := 0; i < 100; i++ {
 
@@ -52,22 +51,22 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		platform3Position := 150.0
 
 		for j := 0; j < len(array2); j++ {
-			val := textdistance.JaroWinklerDistance(strings.ToLower(array1[i][0]), strings.ToLower(array2[j][0]))
+			val := distancetext.JaroWinklerDistance(strings.ToLower(array1[i][0]), strings.ToLower(array2[j][0]))
 			if val == 1.0 {
 				platform2Position = float64(j + 1)
 			} else if val >= 0.8 && strings.ToLower(array1[i][1]) == strings.ToLower(array2[j][1]) {
 				platform2Position = float64(j + 1)
-				alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[j][0]))
+				alreadyCheck = append(alreadyCheck, strings.ToLower(array2[j][0]))
 			}
 		}
 
 		for k := 0; k < len(array3); k++ {
-			val := textdistance.JaroWinklerDistance(strings.ToLower(array1[i][0]), strings.ToLower(array3[k][0]))
+			val := distancetext.JaroWinklerDistance(strings.ToLower(array1[i][0]), strings.ToLower(array3[k][0]))
 			if val == 1.0 {
 				platform3Position = float64(k + 1)
 			} else if val >= 0.8 && strings.ToLower(array1[i][1]) == strings.ToLower(array3[k][1]) {
 				platform2Position = float64(k + 1)
-				alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[k][0]))
+				alreadyCheck = append(alreadyCheck, strings.ToLower(array3[k][0]))
 			}
 		}
 
@@ -93,7 +92,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		}
 
 		finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
-		alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[i][0]))
+		alreadyCheck = append(alreadyCheck, strings.ToLower(array1[i][0]))
 	}
 
 	for i := 0; i < 100; i++ {
@@ -102,25 +101,25 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		platform1Position := 150.0
 		platform3Position := 150.0
 
-		if utils.StringInSlice(strings.ToLower(array2[i][0]), alreadyCkeck) == false {
+		if utils.StringInSlice(strings.ToLower(array2[i][0]), alreadyCheck) == false {
 
 			for j := 0; j < len(array1); j++ {
-				val := textdistance.JaroWinklerDistance(strings.ToLower(array2[i][0]), strings.ToLower(array1[j][0]))
+				val := distancetext.JaroWinklerDistance(strings.ToLower(array2[i][0]), strings.ToLower(array1[j][0]))
 				if val == 1.0 {
 					platform1Position = float64(j + 1)
 				} else if val >= 0.8 && strings.ToLower(array2[i][1]) == strings.ToLower(array1[j][1]) {
 					platform2Position = float64(j + 1)
-					alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[j][0]))
+					alreadyCheck = append(alreadyCheck, strings.ToLower(array1[j][0]))
 				}
 			}
 
 			for k := 0; k < len(array3); k++ {
-				val := textdistance.JaroWinklerDistance(strings.ToLower(array2[i][0]), strings.ToLower(array3[k][0]))
+				val := distancetext.JaroWinklerDistance(strings.ToLower(array2[i][0]), strings.ToLower(array3[k][0]))
 				if val == 1.0 {
 					platform3Position = float64(k + 1)
 				} else if val >= 0.8 && strings.ToLower(array2[i][1]) == strings.ToLower(array3[k][1]) {
 					platform2Position = float64(k + 1)
-					alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[k][0]))
+					alreadyCheck = append(alreadyCheck, strings.ToLower(array3[k][0]))
 				}
 			}
 
@@ -146,7 +145,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			}
 
 			finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
-			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[i][0]))
+			alreadyCheck = append(alreadyCheck, strings.ToLower(array2[i][0]))
 
 		}
 
@@ -158,25 +157,25 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		platform1Position := 150.0
 		platform2Position := 150.0
 
-		if utils.StringInSlice(strings.ToLower(array3[i][0]), alreadyCkeck) == false {
+		if utils.StringInSlice(strings.ToLower(array3[i][0]), alreadyCheck) == false {
 
 			for j := 0; j < len(array1); j++ {
-				val := textdistance.JaroWinklerDistance(strings.ToLower(array3[i][0]), strings.ToLower(array1[j][0]))
+				val := distancetext.JaroWinklerDistance(strings.ToLower(array3[i][0]), strings.ToLower(array1[j][0]))
 				if val == 1.0 {
 					platform1Position = float64(j + 1)
 				} else if val >= 0.8 && strings.ToLower(array3[i][1]) == strings.ToLower(array1[j][1]) {
 					platform2Position = float64(j + 1)
-					alreadyCkeck = append(alreadyCkeck, strings.ToLower(array1[j][0]))
+					alreadyCheck = append(alreadyCheck, strings.ToLower(array1[j][0]))
 				}
 			}
 
 			for k := 0; k < len(array2); k++ {
-				val := textdistance.JaroWinklerDistance(strings.ToLower(array3[i][0]), strings.ToLower(array2[k][0]))
+				val := distancetext.JaroWinklerDistance(strings.ToLower(array3[i][0]), strings.ToLower(array2[k][0]))
 				if val == 1.0 {
 					platform2Position = float64(k + 1)
 				} else if val >= 0.8 && strings.ToLower(array3[i][1]) == strings.ToLower(array2[k][1]) {
 					platform2Position = float64(k + 1)
-					alreadyCkeck = append(alreadyCkeck, strings.ToLower(array2[k][0]))
+					alreadyCheck = append(alreadyCheck, strings.ToLower(array2[k][0]))
 				}
 			}
 
@@ -202,7 +201,7 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 			}
 
 			finalsTracksBeforeSort = append(finalsTracksBeforeSort, finalTrackBeforeSort)
-			alreadyCkeck = append(alreadyCkeck, strings.ToLower(array3[i][0]))
+			alreadyCheck = append(alreadyCheck, strings.ToLower(array3[i][0]))
 
 		}
 
@@ -269,17 +268,15 @@ func Sorter(array1 [][]string, name1 string, array2 [][]string, name2 string, ar
 		bot.Tweet(tweet)
 	}
 
-
-
 	finalJson := models.Final{
 		Header: finalHeader,
 		Tracks: finalsTracks,
 	}
 
-	utils.WriteJSON(finalJson, path)
+	if err = utils.WriteJSON(finalJson, path); err != nil {
+		utils.Logger.Errorf("write json: %v", err)
+	}
 }
-
-
 
 func checkEvolution(final models.Final, name string, position int) (response string) {
 	evolution := "N"

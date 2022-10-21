@@ -32,8 +32,6 @@ Hi ! This program in Golang generates the **top 100** most listened to music on 
 git clone https://github.com/mathieumarcelino/topmusicstreaming
 ```
 
-Local development
-
 Create a directory `local` with a `env.sh`
 
 ```shell
@@ -50,12 +48,7 @@ Run program
 make run
 ```
 
-If env is local you can see output in a ``json`` directory
-
-Otherwise you'll have to make an API request ⬇️
-
-###  Example API Request
-
+#### Example API request
 ```
 http://localhost:9990/api?country=fr
 ```

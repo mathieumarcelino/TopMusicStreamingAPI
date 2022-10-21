@@ -21,8 +21,13 @@ func main() {
 		hub.LaunchAll()
 	}
 
+	utils.Logger.Infof("Listening on port %d", config.Port)
+
 	http.HandleFunc("/api", api.Api)
-	http.ListenAndServe(fmt.Sprintf(":%d", config.Port), nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%d", config.Port), nil)
+	if err != nil {
+		utils.Logger.Panicf(err.Error())
+	}
 }
 
 

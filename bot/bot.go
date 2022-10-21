@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 	"topmusicstreaming/utils"
-	"unicode/utf8"
+	"unicode/utf8" //nolint
 
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
