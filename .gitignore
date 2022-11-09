@@ -1,4 +1,4 @@
 .vscode
 .idea
-local/
-json
+json/
+.env
