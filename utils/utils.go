@@ -18,7 +18,7 @@ func TrimStringArtist(s string) string {
 
 func TrimStringTrack(s string) string {
 	idx1 := strings.Index(s, " - ")
-	idx2 := strings.Index(s, " (")
+	idx2 := strings.Index(s, " (feat")
 	if idx1 != -1 && idx2 != -1 {
 		return s[(idx1 + 3):idx2]
 	} else if idx1 != -1 {
