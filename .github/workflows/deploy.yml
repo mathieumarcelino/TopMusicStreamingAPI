@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Build the binary
-        run: go build -o /root/topmusicstreaming
+        run: go build -o ./topmusicstreaming  # on change le chemin de sortie du binaire
 
       - name: Deploy to VPS
         env:
@@ -31,6 +31,5 @@ jobs:
           echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
-          rsync -avz -e "ssh -i ~/.ssh/id_rsa" /root/topmusicstreaming $SERVER_USER@$SERVER_IP:/root/topmusicstreaming
+          scp -i ~/.ssh/id_rsa ./topmusicstreaming $SERVER_USER@$SERVER_IP:/root/topmusicstreaming  # on utilise scp pour copier le binaire
           ssh -i ~/.ssh/id_rsa $SERVER_USER@$SERVER_IP "sudo systemctl restart topmusicstreaming"
-
