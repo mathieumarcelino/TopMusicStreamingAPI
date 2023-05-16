@@ -23,13 +23,11 @@ jobs:
 
       - name: Deploy to VPS
         env:
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SERVER_IP: 217.160.47.223
-          SERVER_USER: mathi3u
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
-          mkdir -p ~/.ssh/
-          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          sudo apt-get install -y sshpass
           ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
-          scp -i ~/.ssh/id_rsa ./topmusicstreaming $SERVER_USER@$SERVER_IP:/root/topmusicstreaming  # on utilise scp pour copier le binaire
-          ssh -i ~/.ssh/id_rsa $SERVER_USER@$SERVER_IP "sudo systemctl restart topmusicstreaming"
+          sshpass -p $SERVER_PASSWORD scp ./topmusicstreaming $SERVER_USER@$SERVER_IP:/root/topmusicstreaming  # on utilise scp pour copier le binaire
+          sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_IP "sudo systemctl restart topmusicstreaming"
