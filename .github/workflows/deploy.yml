@@ -30,5 +30,5 @@ jobs:
           sudo apt-get install -y sshpass
           mkdir -p ~/.ssh/  # Création du répertoire .ssh si nécessaire
           ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
-          sshpass -p $SERVER_PASSWORD scp ./topmusicstreaming $SERVER_USER@$SERVER_IP:/root/topmusicstreaming  # on utilise scp pour copier le binaire
+          sshpass -p $SERVER_PASSWORD scp ./topmusicstreaming $SERVER_USER@$SERVER_IP:/home/$SERVER_USER/topmusicstreaming  # on utilise scp pour copier le binaire
           sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_IP "sudo systemctl restart topmusicstreaming"
