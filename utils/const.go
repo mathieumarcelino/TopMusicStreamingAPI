@@ -5,19 +5,19 @@ const (
 )
 
 const (
-	Spotify = "spotify"
-	AppleMusic = "applemusic"
-	Deezer = "deezer"
+	Spotify              = "spotify"
+	AppleMusic           = "applemusic"
+	Deezer               = "deezer"
 	PlatformNotSupported = "Platform not supported"
 )
 
 const (
-	SpotifyBaseCollectorUri = "https://kworb.net/spotify/country/"
+	SpotifyBaseCollectorUri    = "https://kworb.net/spotify/country/"
 	AppleMusicCollectorBaseUri = "https://kworb.net/charts/apple_s/"
-	DeezerCollectorBaseUri = "https://kworb.net/charts/deezer/"
+	DeezerCollectorBaseUri     = "https://kworb.net/charts/deezer/"
 )
 
-const AppDomainBaseUri = "topmusicstreaming.com"
+const AppDomainBaseUri = "music.mathi3u.com"
 const CollectorDomain = "kworb.net"
 const HTMLEXT = ".html"
 
@@ -31,7 +31,7 @@ const (
 )
 
 const (
-	PROD = "prod"
+	PROD  = "prod"
 	LOCAL = "local"
 	EMPTY = ""
 )
