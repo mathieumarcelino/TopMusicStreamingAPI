@@ -25,7 +25,7 @@ jobs:
         env:
           DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SERVER_IP: 217.160.47.223
-          SERVER_USER: root
+          SERVER_USER: mathi3u
         run: |
           mkdir -p ~/.ssh/
           echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
