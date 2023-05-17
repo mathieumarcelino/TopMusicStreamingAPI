@@ -30,5 +30,6 @@ jobs:
           sudo apt-get install -y sshpass
           mkdir -p ~/.ssh/
           ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+          sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_IP "mkdir -p /home/$SERVER_USER/topmusicstreaming"
           sshpass -p $SERVER_PASSWORD scp ./topmusicstreaming $SERVER_USER@$SERVER_IP:/home/$SERVER_USER/topmusicstreaming/topmusicstreaming
-          sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_IP "sudo systemctl restart topmusicstreaming"
+          sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_IP "sudo service topmusicstreaming restart"
