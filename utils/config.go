@@ -1,8 +1,10 @@
 package utils
 
 import (
-	"github.com/joho/godotenv"
 	"os"
+	"path/filepath"
+
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -12,7 +14,8 @@ type Config struct {
 }
 
 func LoadConfig() Config {
-	err := godotenv.Load()
+	dir, _ := os.Getwd()
+	err := godotenv.Load(filepath.Join(dir, ".env"))
 	if err != nil {
 		Logger.Fatal("could not load .env file")
 	}
