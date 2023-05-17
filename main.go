@@ -23,11 +23,19 @@ func main() {
 
 	utils.Logger.Infof("Listening on port %d", config.Port)
 
+	if config.Env == utils.PROD {
+		http.Handle("/", http.FileServer(http.Dir("home/mathieu/topmusicstreaming/build")))
+		http.Handle("/us/", http.StripPrefix("/us/", http.FileServer(http.Dir("home/mathieu/topmusicstreaming/build"))))
+		http.Handle("/fr/", http.StripPrefix("/fr/", http.FileServer(http.Dir("home/mathieu/topmusicstreaming/build"))))
+		http.Handle("/de/", http.StripPrefix("/de/", http.FileServer(http.Dir("home/mathieu/topmusicstreaming/build"))))
+		http.Handle("/es/", http.StripPrefix("/es/", http.FileServer(http.Dir("home/mathieu/topmusicstreaming/build"))))
+		http.Handle("/pt/", http.StripPrefix("/pt/", http.FileServer(http.Dir("home/mathieu/topmusicstreaming/build"))))
+		http.Handle("/it/", http.StripPrefix("/it/", http.FileServer(http.Dir("home/mathieu/topmusicstreaming/build"))))
+	}
+
 	http.HandleFunc("/api", api.Api)
 	err := http.ListenAndServe(fmt.Sprintf(":%d", config.Port), nil)
 	if err != nil {
 		utils.Logger.Panicf(err.Error())
 	}
 }
-
-
