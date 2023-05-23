@@ -31,7 +31,7 @@ format.
 ## Usage
 
 ```
-git clone https://github.com/mathieumarcelino/topmusicstreaming
+git clone https://github.com/mathieumarcelino/TopMusicStreamingAPI.git
 ```
 
 By default the `ENV` is set to **prod**, to run the program in a **local** environment create a `.env` file and add the
