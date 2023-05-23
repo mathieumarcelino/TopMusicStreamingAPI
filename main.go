@@ -23,7 +23,7 @@ func main() {
 
 	utils.Logger.Infof("Listening on port %d", config.Port)
 
-	http.HandleFunc("/api", api.Api)
+	http.HandleFunc("/", api.Api)
 	err := http.ListenAndServe(fmt.Sprintf(":%d", config.Port), nil)
 	if err != nil {
 		utils.Logger.Panicf(err.Error())

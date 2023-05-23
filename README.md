@@ -50,7 +50,7 @@ make run
 #### Example API request
 
 ```
-http://localhost:9990/api?country=fr
+http://localhost:9990/?country=fr
 ```
 
 #### Country Options
