@@ -1,6 +1,7 @@
 package bot
 
 import (
+	"os"
 	"log"
 	"strings"
 	"time"
@@ -12,8 +13,8 @@ import (
 )
 
 func Tweet(body string) {
-	config := oauth1.NewConfig("***", "***")
-	token := oauth1.NewToken("***", "***")
+	config := oauth1.NewConfig(os.Getenv("TwitterAPIConsumerKey"), os.Getenv("TwitterAPIConsumerSecret"))
+	token := oauth1.NewToken(os.Getenv("TwitterAPIAccessToken"), os.Getenv("TwitterAPIAccessSecret"))
 	httpClient := config.Client(oauth1.NoContext, token)
 	client := twitter.NewClient(httpClient)
 

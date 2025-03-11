@@ -6,10 +6,14 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"fmt"
 	"topmusicstreaming/bot"
 	"topmusicstreaming/models"
 	"topmusicstreaming/utils"
 	"unicode/utf8" //nolint
+	"io/ioutil"
+	"net/http"
+	"net/url"
 
 	distancetext "github.com/masatana/go-textdistance"
 )
@@ -229,6 +233,7 @@ func Sort(array1 [][]string, name1 string, array2 [][]string, name2 string, arra
 				Evolution: checkEvolution(final, finalsTracksBeforeSort[i].Track, position),
 				Track:     finalsTracksBeforeSort[i].Track,
 				Artist:    finalsTracksBeforeSort[i].Artist,
+				Cover:	   getCover(finalsTracksBeforeSort[i].Artist, finalsTracksBeforeSort[i].Track),
 				Positions: finalPosition,
 			}
 			finalsTracks = append(finalsTracks, finalTrack)
@@ -245,6 +250,7 @@ func Sort(array1 [][]string, name1 string, array2 [][]string, name2 string, arra
 				Evolution: checkEvolution(final, finalsTracksBeforeSort[i].Track, position),
 				Track:     finalsTracksBeforeSort[i].Track,
 				Artist:    finalsTracksBeforeSort[i].Artist,
+				Cover:	   getCover(finalsTracksBeforeSort[i].Artist, finalsTracksBeforeSort[i].Track),
 				Positions: finalPosition,
 			}
 			finalsTracks = append(finalsTracks, finalTrack)
@@ -253,7 +259,7 @@ func Sort(array1 [][]string, name1 string, array2 [][]string, name2 string, arra
 		}
 	}
 
-	if utils.LoadConfig().Env == utils.PROD {
+	if utils.LoadConfig().Env == utils.PROD && os.Getenv("TwitterBotEnabled") == "true"{
 		tweet := bot.TweetHeader(country)
 		tweet += "\n\n"
 		tweet += bot.TweetPosition(finalsTracks[0].Position) + bot.TweetEvolution(finalsTracks[0].Evolution) + " " + finalsTracks[0].Artist + " - " + finalsTracks[0].Track + "\n"
@@ -296,3 +302,52 @@ func checkEvolution(final models.Final, name string, position int) (response str
 	}
 	return evolution
 }
+
+type LastFmResponse struct {
+	Track struct {
+		Album struct {
+			Image []struct {
+				Size string `json:"size"`
+				URL  string `json:"#text"`
+			} `json:"image"`
+		} `json:"album"`
+	} `json:"track"`
+}
+
+func getCover(artist string, track string) (response string) {
+	baseURL := "https://ws.audioscrobbler.com/2.0/"
+	params := url.Values{}
+	params.Set("method", "track.getInfo")
+	params.Set("api_key", os.Getenv("LastFmAPIKey"))
+	params.Set("artist", artist)
+	params.Set("track", track)
+	params.Set("format", "json")
+
+	requestURL := fmt.Sprintf("%s?%s", baseURL, params.Encode())
+
+	resp, err := http.Get(requestURL)
+	if err != nil {
+		return ""
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return ""
+	}
+
+	var result LastFmResponse
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		return ""
+	}
+
+	for _, img := range result.Track.Album.Image {
+		if img.Size == "large" {
+			return img.URL
+		}
+	}
+
+	return ""
+}
+

@@ -10,6 +10,7 @@ type Track struct {
 	Evolution string    `json:"evolution"`
 	Track     string    `json:"track"`
 	Artist    string    `json:"artist"`
+	Cover    string    	`json:"cover"`
 	Positions Positions `json:"positions"`
 }
 
