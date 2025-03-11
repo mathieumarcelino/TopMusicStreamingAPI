@@ -50,20 +50,23 @@ func TrimTweet(s string) string {
 func ensurePath(dir, file string) (string, error) {
 	cwd, _ := os.Getwd()
 	if _, err := os.Stat(dir); errors.Is(err, os.ErrNotExist) {
-		err := os.Mkdir(dir, os.ModePerm)
-		if err != nil {
+		if err := os.Mkdir(dir, os.ModePerm); err != nil {
 			return "", err
 		}
 	}
 
 	path := filepath.Join(cwd, dir, file)
 	newFilePath := filepath.FromSlash(path)
-	_, err := os.Create(newFilePath)
-	if err != nil {
-		return "", err
-	}
 
-	Logger.Infof("%s created successfully at %s \n", file, newFilePath)
+	if _, err := os.Stat(newFilePath); errors.Is(err, os.ErrNotExist) {
+		file, err := os.Create(newFilePath)
+		if err != nil {
+			return "", err
+		}
+		file.Close()
+
+		Logger.Infof("%s created successfully at %s \n", file.Name(), newFilePath)
+	}
 
 	return newFilePath, nil
 }
