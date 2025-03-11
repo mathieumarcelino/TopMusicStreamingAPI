@@ -315,6 +315,11 @@ type LastFmResponse struct {
 }
 
 func getCover(artist string, track string) (response string) {
+
+	if os.Getenv("GetCover") == "false" {
+		return ""
+	}
+
 	baseURL := "https://ws.audioscrobbler.com/2.0/"
 	params := url.Values{}
 	params.Set("method", "track.getInfo")
