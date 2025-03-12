@@ -9,6 +9,7 @@ import (
 
 func Start() {
 	c := cronjob.New()
+	c.AddFunc(setCronSpec(utils.EuropeLocation, 14, 30), func() { hub.Launch(utils.WW) })
 	c.AddFunc(setCronSpec(utils.EuropeLocation, 15, 30), func() { hub.Launch(utils.US) })
 	c.AddFunc(setCronSpec(utils.EuropeLocation, 16, 30), func() { hub.Launch(utils.FR) })
 	c.AddFunc(setCronSpec(utils.EuropeLocation, 17, 30), func() { hub.Launch(utils.DE) })

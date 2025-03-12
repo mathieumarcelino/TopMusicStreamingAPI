@@ -22,6 +22,7 @@ const CollectorDomain = "kworb.net"
 const HTMLEXT = ".html"
 
 const (
+	WW = "ww"
 	FR = "fr"
 	ES = "es"
 	DE = "de"

@@ -28,6 +28,7 @@ func Spotify(country string) [][]string {
 		})
 
 	})
+	if country == "ww" { country = "global" }
 	collectorSpotify.Visit(utils.BuildCollectorUrl(utils.Spotify, country))
 
 	return allInfosSpotify
@@ -56,7 +57,13 @@ func AppleMusic(country string) [][]string {
 		})
 
 	})
-	collectorAppleMusic.Visit(utils.BuildCollectorUrl(utils.AppleMusic, country))
+
+	switch country {
+		case "ww":
+			collectorAppleMusic.Visit("https://kworb.net/apple_songs/index.html")
+		default:
+			collectorAppleMusic.Visit(utils.BuildCollectorUrl(utils.AppleMusic, country))
+	}
 
 	return allInfosAppleMusic
 }

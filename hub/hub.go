@@ -15,6 +15,7 @@ func Launch(country string) {
 }
 
 func LaunchAll() {
+	Launch(utils.WW)
 	Launch(utils.US)
 	Launch(utils.FR)
 	Launch(utils.DE)
