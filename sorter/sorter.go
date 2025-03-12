@@ -14,6 +14,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"regexp"
 
 	distancetext "github.com/masatana/go-textdistance"
 )
@@ -319,6 +320,10 @@ func getCover(artist string, track string) (response string) {
 	if os.Getenv("GetCover") == "false" {
 		return ""
 	}
+
+	// Nettoyage du titre pour retirer les parties "(w/ ...)"
+	re := regexp.MustCompile(`\s*\(w/.*\)`)
+	track = re.ReplaceAllString(track, "")
 
 	baseURL := "https://ws.audioscrobbler.com/2.0/"
 	params := url.Values{}
