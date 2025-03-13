@@ -7,25 +7,44 @@ import (
 	"path/filepath"
 	"strings"
 	"topmusicstreaming/models"
+	"regexp"
 )
 
 func TrimStringArtist(s string) string {
 	if idx := strings.Index(s, " - "); idx != -1 {
-		return s[:idx]
+		s = s[:idx]
 	}
+
+	separators := []string{" & ", " x ", " feat.", " ft."}
+
+	for _, sep := range separators {
+		if idx := strings.Index(s, sep); idx != -1 {
+			s = s[:idx]
+			break
+		}
+	}
+
+	s = strings.TrimSpace(s)
+
 	return s
 }
 
 func TrimStringTrack(s string) string {
 	idx1 := strings.Index(s, " - ")
-	idx2 := strings.Index(s, " (feat")
-	if idx1 != -1 && idx2 != -1 {
-		return s[(idx1 + 3):idx2]
-	} else if idx1 != -1 {
-		return s[(idx1 + 3):]
+	if idx1 == -1 {
+		return s
 	}
-	return s
+
+	track := s[idx1+3:]
+
+	re := regexp.MustCompile(`\s*\([^)]*\)`)
+	track = re.ReplaceAllString(track, "")
+
+	track = strings.TrimSpace(track)
+
+	return track
 }
+
 
 func StringInSlice(a string, list []string) bool {
 	for _, b := range list {
