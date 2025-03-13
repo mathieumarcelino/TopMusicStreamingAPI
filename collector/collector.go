@@ -3,10 +3,11 @@ package collector
 import (
 	"github.com/gocolly/colly"
 	"topmusicstreaming/utils"
+	"topmusicstreaming/models"
 )
 
-func Spotify(country string) [][]string {
-	var allInfosSpotify [][]string
+func Spotify(country string) []models.Info {
+	var allInfosSpotify []models.Info
 	i := 0
 
 	collectorSpotify := colly.NewCollector(
@@ -18,9 +19,9 @@ func Spotify(country string) [][]string {
 			if i < 100 {
 				infoTRACKSpotify := utils.TrimStringTrack(el.ChildText(".mp div"))
 				infoARTISTSpotify := utils.TrimStringArtist(el.ChildText(".mp div"))
-				infoCOVERSpotify := ""
+				infoPOSITIONSpotify := i + 1
 
-				infoSpotify := []string{infoTRACKSpotify, infoARTISTSpotify, infoCOVERSpotify}
+				infoSpotify := models.Info{infoTRACKSpotify, infoARTISTSpotify, infoPOSITIONSpotify}
 
 				allInfosSpotify = append(allInfosSpotify, infoSpotify)
 			}
@@ -34,8 +35,8 @@ func Spotify(country string) [][]string {
 	return allInfosSpotify
 }
 
-func AppleMusic(country string) [][]string {
-	var allInfosAppleMusic [][]string
+func AppleMusic(country string) []models.Info {
+	var allInfosAppleMusic []models.Info
 	i := 0
 
 	collectorAppleMusic := colly.NewCollector(
@@ -47,9 +48,9 @@ func AppleMusic(country string) [][]string {
 			if i < 100 {
 				infoTRACKAppleMusic := utils.TrimStringTrack(el.ChildText(".mp div"))
 				infoARTISTAppleMusic := utils.TrimStringArtist(el.ChildText(".mp div"))
-				infoCOVERAppleMusic := ""
+				infoPOSITIONAppleMusic := i + 1
 
-				infoAppleMusic := []string{infoTRACKAppleMusic, infoARTISTAppleMusic, infoCOVERAppleMusic}
+				infoAppleMusic := models.Info{infoTRACKAppleMusic, infoARTISTAppleMusic, infoPOSITIONAppleMusic}
 
 				allInfosAppleMusic = append(allInfosAppleMusic, infoAppleMusic)
 			}
@@ -68,8 +69,8 @@ func AppleMusic(country string) [][]string {
 	return allInfosAppleMusic
 }
 
-func Deezer(country string) [][]string {
-	var allInfosDeezer [][]string
+func Deezer(country string) []models.Info {
+	var allInfosDeezer []models.Info
 	i := 0
 
 	collectorDeezer := colly.NewCollector(
@@ -81,9 +82,9 @@ func Deezer(country string) [][]string {
 			if i < 100 {
 				infoTRACKDeezer := utils.TrimStringTrack(el.ChildText(".mp div"))
 				infoARTISTDeezer := utils.TrimStringArtist(el.ChildText(".mp div"))
-				infoCOVERDeezer := ""
+				infoPOSITIONDeezer := i + 1
 
-				infoDeezer := []string{infoTRACKDeezer, infoARTISTDeezer, infoCOVERDeezer}
+				infoDeezer := models.Info{infoTRACKDeezer, infoARTISTDeezer, infoPOSITIONDeezer}
 
 				allInfosDeezer = append(allInfosDeezer, infoDeezer)
 			}

@@ -12,6 +12,12 @@ const (
 )
 
 const (
+	SpotifyPenalty       = 15
+	AppleMusicPenalty    = 10
+	DeezerPenalty        = 5
+)
+
+const (
 	SpotifyBaseCollectorUri    = "https://kworb.net/spotify/country/"
 	AppleMusicCollectorBaseUri = "https://kworb.net/charts/apple_s/"
 	DeezerCollectorBaseUri     = "https://kworb.net/charts/deezer/"
