@@ -29,11 +29,15 @@ const HTMLEXT = ".html"
 
 const (
 	WW = "ww"
-	FR = "fr"
-	ES = "es"
-	DE = "de"
-	PT = "pt"
 	US = "us"
+	FR = "fr"
+	UK = "uk"
+	JP = "jp"
+	KR = "kr"
+	TR = "tr"
+	DE = "de"
+	ES = "es"
+	PT = "pt"
 	IT = "it"
 )
 

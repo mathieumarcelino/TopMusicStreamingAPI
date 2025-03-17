@@ -30,6 +30,7 @@ func Spotify(country string) []models.Info {
 
 	})
 	if country == "ww" { country = "global" }
+	if country == "uk" { country = "gb" }
 	collectorSpotify.Visit(utils.BuildCollectorUrl(utils.Spotify, country))
 
 	return allInfosSpotify

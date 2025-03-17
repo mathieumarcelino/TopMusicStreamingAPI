@@ -25,8 +25,12 @@ func LaunchAll() {
 	Launch(utils.WW)
 	Launch(utils.US)
 	Launch(utils.FR)
+	Launch(utils.UK)
+	Launch(utils.JP)
+	Launch(utils.KR)
+	Launch(utils.TR)
 	Launch(utils.DE)
 	Launch(utils.ES)
 	Launch(utils.PT)
-	Launch(utils.IT)
+	Launch(utils.IT)	
 }
