@@ -27,10 +27,12 @@ This Golang program scrapes streaming platforms to generate the **top 100** most
 
 ## Usage
 
+#### Clone the repository
 ```
 git clone https://github.com/mathieumarcelino/TopMusicStreamingAPI.git
 ```
 
+#### Create a `.env` file
 By default the `ENV` is set to **prod**, to run the program in a **local** environment create a `.env` file and add the
 following:
 
@@ -38,8 +40,7 @@ following:
 ENV="local"
 ```
 
-Run program
-
+#### Run program
 ```
 make run
 ```
