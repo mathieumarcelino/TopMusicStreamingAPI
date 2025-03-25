@@ -1,9 +1,6 @@
 # TopMusicStreaming
 
-Hi ! This program in Golang generates the **top 100** most listened to music on streaming platforms. The ranking is
-based on the average of the positions of a track on **Spotify**, **Apple Music** and **Deezer**. When it is launched, it
-goes to the different platforms to retrieve the rankings. An algorithm sorts the data and generates a final file in Json
-format.
+This Golang program scrapes streaming platforms to generate the **top 100** most listened-to songs. The ranking is based on the average of the positions of a track on **Spotify**, **Apple Music** and **Deezer**. When it is launched, it goes to the different platforms to retrieve the rankings. An algorithm sorts the data and generates a final file in Json format.
 
 ## Link
 
@@ -55,9 +52,14 @@ http://localhost:9990/?country=fr
 
 #### Country Options
 
-- fr (France 🇫🇷)
-- de (Deutsch 🇩🇪)
+- ww (Worldwide 🌍)
 - us (United States 🇺🇸)
-- pt (Portugal 🇵🇹)
+- fr (France 🇫🇷)
+- uk (United Kingdom 🇬🇧)
+- jp (Japan 🇯🇵)
+- kr (South Korea 🇰🇷)
+- tr (Turkey 🇹🇷)
+- de (Germany 🇩🇪)
 - es (Spain 🇪🇸)
+- pt (Portugal 🇵🇹)
 - it (Italy 🇮🇹)
