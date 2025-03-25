@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  music-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: music-api
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "4001:9990"
+    networks:
+      - music-api_network
+
+networks:
+  music-api_network:
+    driver: bridge
