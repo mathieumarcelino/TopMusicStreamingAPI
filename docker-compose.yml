@@ -1,19 +1,17 @@
 version: '3.8'
 
+networks:
+  proxy:
+    external: true
+
 services:
   music-api:
+    container_name: music-api
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: music-api
-    restart: always
     env_file:
       - .env
-    ports:
-      - "4001:9990"
     networks:
-      - music-api_network
-
-networks:
-  music-api_network:
-    driver: bridge
+      - proxy
